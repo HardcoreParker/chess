@@ -39,20 +39,18 @@ public class Board {
 	// We will use the value of 'up' to compare to valid move sets, which will be ran against the state of the board 
 	public static Space calculateUp(Space origin) {
 		if(origin.getRow() < 8) {
-			char newColumn = origin.getColumn();
 			int newRow = origin.getRow() + 1;
 			
-			return calculateSpace(newColumn, newRow);
+			return calculateSpace(origin.getColumn(), newRow);
 		} else {
 			return null;
 		}
 	}
 	public static Space calculateDown(Space origin) {
 		if(origin.getRow() > 1) {
-			char newColumn = origin.getColumn();
 			int newRow = origin.getRow() - 1;
 			
-			return calculateSpace(newColumn, newRow);
+			return calculateSpace(origin.getColumn(), newRow);
 		} else {
 			return null;
 		}
@@ -92,6 +90,17 @@ public class Board {
 		
 		return calculateSpace(newColumn, newRow);
 	}
+	public static Space calculateLeft(Space origin) {
+		char newColumn = (char) (origin.getColumn() - 1);
+		
+		return calculateSpace(newColumn, origin.getRow());
+	}
+	public static Space calculateRight(Space origin) {
+		char newColumn = (char) (origin.getColumn() + 1);
+		
+		return calculateSpace(newColumn, origin.getRow());
+	}
+	
 	
 	private static Space calculateSpace(char column, int row) {
 		return Space.valueOf(Space.class, String.valueOf(column)+String.valueOf(row));

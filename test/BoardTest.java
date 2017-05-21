@@ -33,7 +33,21 @@ public class BoardTest {
 		
 		assertEquals(expected, actual);
 	}
-	// Calculate Left and Right
+	
+	@Test
+	public void calculateLeft_Test() {
+		Space actual = Board.calculateLeft(Space.D4);
+		Space expected = Space.C4;
+		
+		assertEquals(expected, actual);
+	}
+	@Test
+	public void calculateRight_Test() {
+		Space actual = Board.calculateRight(Space.D4);
+		Space expected = Space.E4;
+		
+		assertEquals(expected, actual);
+	}
 	
 	@Test
 	public void calculateDiagonal_NE_test() {
