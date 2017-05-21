@@ -35,12 +35,66 @@ public class Board {
 		result.append("|");
 		return result.toString();
 	}
+	// is this right, should we be returning the actual enum or the value of the board hashmap - YES, it's right. 
+	// We will use the value of 'up' to compare to valid move sets, which will be ran against the state of the board 
+	public static Space calculateUp(Space origin) {
+		if(origin.getRow() < 8) {
+			char newColumn = origin.getColumn();
+			int newRow = origin.getRow() + 1;
+			
+			return calculateSpace(newColumn, newRow);
+		} else {
+			return null;
+		}
+	}
+	public static Space calculateDown(Space origin) {
+		if(origin.getRow() > 1) {
+			char newColumn = origin.getColumn();
+			int newRow = origin.getRow() - 1;
+			
+			return calculateSpace(newColumn, newRow);
+		} else {
+			return null;
+		}
+	}
 	
 	private String getBoardDivider() {
 		return BOARD_COLOR + "|";
 	}
 	private String getEmptySpace() {
 		return BOARD_COLOR + "_";
+	}
+
+	public static Space calculateDiagonalNE(Space origin) {
+		char newColumn = (char) (origin.getColumn() + 1);
+		int newRow = origin.getRow() + 1;
+		
+		return calculateSpace(newColumn, newRow);
+	}
+
+	public static Space calculateDiagonalSE(Space origin) {
+		char newColumn = (char) (origin.getColumn() + 1);
+		int newRow = origin.getRow() - 1;
+		
+		return calculateSpace(newColumn, newRow);
+	}
+
+	public static Space calculateDiagonalNW(Space origin) {
+		char newColumn = (char) (origin.getColumn() - 1);
+		int newRow = origin.getRow() + 1;
+		
+		return calculateSpace(newColumn, newRow);
+	}
+
+	public static Space calculateDiagonalSW(Space origin) {
+		char newColumn = (char) (origin.getColumn() - 1);
+		int newRow = origin.getRow() - 1;
+		
+		return calculateSpace(newColumn, newRow);
+	}
+	
+	private static Space calculateSpace(char column, int row) {
+		return Space.valueOf(Space.class, String.valueOf(column)+String.valueOf(row));
 	}
 	
 }
