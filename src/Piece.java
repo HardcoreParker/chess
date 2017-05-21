@@ -8,10 +8,13 @@ public abstract class Piece {
 	public Piece(Team team) {
 		setTeam(team);
 	}
-	
 
 	public char getShortName() {
 		return this.toString().charAt(0);
+	}
+	
+	public String getPaintedName() {
+		return this.getTeam().getColor() + this.getShortName();
 	}
 	public Team getTeam() {
 		return this.team;

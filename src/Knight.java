@@ -11,5 +11,10 @@ public class Knight extends Piece {
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public char getShortName() {
+		return 'N';
+	}
 
 }

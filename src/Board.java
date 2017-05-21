@@ -3,6 +3,7 @@ import java.util.LinkedHashMap;
 
 public class Board {
 	
+	private static final String BOARD_COLOR = "\u001B[33m"; // purple
 	LinkedHashMap<Space, Piece> board = new LinkedHashMap<>();
 	
 	public Board() {
@@ -21,17 +22,25 @@ public class Board {
 		int row = 8;
 		for(Space space : board.keySet()) {
 			if(space.getRow() < row) {
-				result.append("|").append(System.lineSeparator()); // Take note
+				result.append(getBoardDivider()).append(System.lineSeparator()); // Take note
 				row--;
 			}
-			result.append("|");
+			result.append(getBoardDivider());
 			if(board.get(space) != null) {
-				result.append(board.get(space).getShortName());				
+				result.append(board.get(space).getPaintedName());				
 			} else {
-				result.append("_");
+				result.append(getEmptySpace());
 			}
 		}
 		result.append("|");
 		return result.toString();
 	}
+	
+	private String getBoardDivider() {
+		return BOARD_COLOR + "|";
+	}
+	private String getEmptySpace() {
+		return BOARD_COLOR + "_";
+	}
+	
 }
