@@ -9,6 +9,10 @@ public abstract class Piece {
 		setTeam(team);
 	}
 	
+
+	public char getShortName() {
+		return this.toString().charAt(0);
+	}
 	public Team getTeam() {
 		return this.team;
 	}
