@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Board {
 	
 	private static final String BOARD_COLOR = "\u001B[33m"; // purple
-	LinkedHashMap<Space, Piece> board = new LinkedHashMap<>();
+	static LinkedHashMap<Space, Piece> board = new LinkedHashMap<>();
 	
 	public Board() {
 		for(Space value : Space.values()) {
@@ -12,6 +13,7 @@ public class Board {
 		}
 	}
 	
+	// Singleton?
 	public LinkedHashMap<Space, Piece> getBoard() {
 		return board;
 	}
@@ -113,6 +115,75 @@ public class Board {
 		int newRow = origin.getRow() - 1;
 		
 		return calculateSpace(newColumn, newRow);
+	}
+	
+	public static ArrayList<Space> walkBoardUntilNextSpaceUnavailable(Space origin, String direction) {
+		ArrayList<Space> list = new ArrayList<Space>();
+		Space next = origin;
+		while(next != null) {
+			
+			if(direction.equals("NE")) {
+				next = calculateDiagonalNE(next);
+			} else if(direction.equals("NW")) {
+				next = calculateDiagonalNW(next);
+			} else if(direction.equals("SE")) {
+				next = calculateDiagonalSE(next);
+			} else if(direction.equals("SW")) {
+				next = calculateDiagonalSW(next);
+			} else if(direction.equals("N")) {
+				next = calculateUp(next);
+			} else if(direction.equals("S")) {
+				next = calculateDown(next);
+			} else if(direction.equals("W")) {
+				next = calculateLeft(next);
+			} else if(direction.equals("E")) {
+				next = calculateRight(next);
+			}
+			
+			if(isSpaceEmpty(next)) {
+				list.add(next);
+			}
+		}
+		return list;
+	}
+	
+	public static ArrayList<Space> walkBoardUntilNextSpaceUnavailable(Space origin, String direction, int times) {
+		ArrayList<Space> list = new ArrayList<Space>();
+		Space next = origin;
+		while(next != null && times > 0) {
+			
+			if(direction.equals("NE")) {
+				next = calculateDiagonalNE(next);
+			} else if(direction.equals("NW")) {
+				next = calculateDiagonalNW(next);
+			} else if(direction.equals("SE")) {
+				next = calculateDiagonalSE(next);
+			} else if(direction.equals("SW")) {
+				next = calculateDiagonalSW(next);
+			} else if(direction.equals("N")) {
+				next = calculateUp(next);
+			} else if(direction.equals("S")) {
+				next = calculateDown(next);
+			} else if(direction.equals("W")) {
+				next = calculateLeft(next);
+			} else if(direction.equals("E")) {
+				next = calculateRight(next);
+			}
+			
+			if(isSpaceEmpty(next)) {
+				list.add(next);
+				times--;
+			}
+		}
+		return list;
+	}
+	
+	public static boolean isSpaceEmpty(Space space) {
+		return board.get(space) != null;
+	}
+	
+	public static boolean isSpaceOccupiedByEnemy(Space space, Team team) {
+		return board.get(space) != null && board.get(space).getTeam() != team;
 	}
 	
 	private static Space calculateSpace(char column, int row) {
