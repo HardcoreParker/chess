@@ -46,6 +46,7 @@ public class Board {
 			return null;
 		}
 	}
+
 	public static Space calculateDown(Space origin) {
 		if(origin.getRow() > 1) {
 			int newRow = origin.getRow() - 1;
@@ -56,14 +57,28 @@ public class Board {
 		}
 	}
 	
-	private String getBoardDivider() {
-		return BOARD_COLOR + "|";
+	public static Space calculateLeft(Space origin) {
+		if(isLeftColumn(origin.getColumn())) {
+			return null;
+		}
+		char newColumn = (char) (origin.getColumn() - 1);
+		
+		return calculateSpace(newColumn, origin.getRow());
 	}
-	private String getEmptySpace() {
-		return BOARD_COLOR + "_";
+
+	public static Space calculateRight(Space origin) {
+		if(isRightColumn(origin.getColumn())) {
+			return null;
+		}
+		char newColumn = (char) (origin.getColumn() + 1);
+		
+		return calculateSpace(newColumn, origin.getRow());
 	}
 
 	public static Space calculateDiagonalNE(Space origin) {
+		if(isTopRow(origin.getRow()) || isRightColumn(origin.getColumn())) {
+			return null;
+		}
 		char newColumn = (char) (origin.getColumn() + 1);
 		int newRow = origin.getRow() + 1;
 		
@@ -71,6 +86,9 @@ public class Board {
 	}
 
 	public static Space calculateDiagonalSE(Space origin) {
+		if(isBottomRow(origin.getRow()) || isRightColumn(origin.getColumn())) {
+			return null;
+		}
 		char newColumn = (char) (origin.getColumn() + 1);
 		int newRow = origin.getRow() - 1;
 		
@@ -78,6 +96,9 @@ public class Board {
 	}
 
 	public static Space calculateDiagonalNW(Space origin) {
+		if(isTopRow(origin.getRow()) || isLeftColumn(origin.getColumn())) {
+			return null;
+		}
 		char newColumn = (char) (origin.getColumn() - 1);
 		int newRow = origin.getRow() + 1;
 		
@@ -85,25 +106,35 @@ public class Board {
 	}
 
 	public static Space calculateDiagonalSW(Space origin) {
+		if(isBottomRow(origin.getRow()) || isLeftColumn(origin.getColumn())) {
+			return null;
+		}
 		char newColumn = (char) (origin.getColumn() - 1);
 		int newRow = origin.getRow() - 1;
 		
 		return calculateSpace(newColumn, newRow);
 	}
-	public static Space calculateLeft(Space origin) {
-		char newColumn = (char) (origin.getColumn() - 1);
-		
-		return calculateSpace(newColumn, origin.getRow());
-	}
-	public static Space calculateRight(Space origin) {
-		char newColumn = (char) (origin.getColumn() + 1);
-		
-		return calculateSpace(newColumn, origin.getRow());
-	}
-	
 	
 	private static Space calculateSpace(char column, int row) {
 		return Space.valueOf(Space.class, String.valueOf(column)+String.valueOf(row));
 	}
 	
+	private static boolean isLeftColumn(char column) {
+		return column == 'A';
+	}
+	private static boolean isRightColumn(char column) {
+		return column == 'H';
+	}
+	private static boolean isTopRow(int row) {
+		return row == 8;
+	}
+	private static boolean isBottomRow(int row) {
+		return row == 1;
+	}
+	private String getBoardDivider() {
+		return BOARD_COLOR + "|";
+	}
+	private String getEmptySpace() {
+		return BOARD_COLOR + "_";
+	}
 }
