@@ -150,7 +150,7 @@ public class Board {
 	public static ArrayList<Space> walkBoardUntilNextSpaceUnavailable(Space origin, String direction, int times) {
 		ArrayList<Space> list = new ArrayList<Space>();
 		Space next = origin;
-		while(next != null && times > 0) {
+		while(next != null || times > 0) {
 			
 			if(direction.equals("NE")) {
 				next = calculateDiagonalNE(next);
