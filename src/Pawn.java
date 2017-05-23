@@ -15,24 +15,19 @@ public class Pawn extends Piece {
 
 	@Override
 	public ArrayList<Space> calculateValidMoves(Space origin) {
-		ArrayList<Space> availableSpaces = new ArrayList<>();
-		
-		availableSpaces.addAll(calculateSpacesPawnCanMoveTo(origin, hasAlreadyMoved));
-		
-		return availableSpaces;
+		return calculateSpacesPawnCanMoveTo(origin, hasAlreadyMoved);
 	}
 	
 	private ArrayList<Space> calculateSpacesPawnCanMoveTo(Space origin, boolean hasAlreadyMoved) {
 		ArrayList<Space> list = new ArrayList<>();
 		
-		// Calculate one move 'forward'
 		int times = hasAlreadyMoved ? 1 : 2;
 		
 		if(this.getTeam() == Team.WHITE) {
-			list = Board.walkBoardUntilNextSpaceUnavailable(origin, "N", times);
+			list.addAll(Board.walkBoardUntilNextSpaceUnavailable(origin, "N", times));
 			hasAlreadyMoved = true;
 		} else {
-			list = Board.walkBoardUntilNextSpaceUnavailable(origin, "S", times);
+			list.addAll(Board.walkBoardUntilNextSpaceUnavailable(origin, "S", times));
 			hasAlreadyMoved = true;
 		}
 		
