@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Knight extends Piece {
 
@@ -15,6 +16,12 @@ public class Knight extends Piece {
 	@Override
 	public char getShortName() {
 		return 'N';
+	}
+
+	@Override
+	public ArrayList<Space> calculateValidMoves(Space origin) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

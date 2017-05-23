@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Queen extends Piece {
 
@@ -10,6 +11,12 @@ public class Queen extends Piece {
 	public void move() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public ArrayList<Space> calculateValidMoves(Space origin) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
