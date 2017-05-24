@@ -1,6 +1,8 @@
+package orchestration;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+
+import piece.Piece;
 
 public class Board {
 	

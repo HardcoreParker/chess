@@ -1,5 +1,9 @@
+package piece;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+import orchestration.Space;
+import orchestration.Team;
 
 public abstract class Piece {
 	

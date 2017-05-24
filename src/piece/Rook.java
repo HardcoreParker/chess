@@ -1,16 +1,18 @@
+package piece;
 import java.util.ArrayList;
 
-public class Queen extends Piece {
+import orchestration.Space;
+import orchestration.Team;
 
-	public Queen(Team team) {
+public class Rook extends Piece {
+
+	public Rook(Team team) {
 		super(team);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

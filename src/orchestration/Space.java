@@ -1,3 +1,11 @@
+package orchestration;
+import piece.Bishop;
+import piece.King;
+import piece.Knight;
+import piece.Pawn;
+import piece.Piece;
+import piece.Queen;
+import piece.Rook;
 
 public enum Space {
 	A8(new Rook(Team.BLACK)),

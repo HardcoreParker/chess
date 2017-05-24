@@ -1,6 +1,10 @@
+package orchestration;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import orchestration.Board;
+import orchestration.Space;
 
 public class BoardTest {
 

@@ -1,8 +1,14 @@
+package piece;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import orchestration.Board;
+import orchestration.Space;
+import orchestration.Team;
+
 
 public class PawnTest {
 		

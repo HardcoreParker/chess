@@ -1,8 +1,12 @@
+package piece;
 import java.util.ArrayList;
 
-public class Knight extends Piece {
+import orchestration.Space;
+import orchestration.Team;
 
-	public Knight(Team team) {
+public class Queen extends Piece {
+
+	public Queen(Team team) {
 		super(team);
 		// TODO Auto-generated constructor stub
 	}
@@ -11,11 +15,6 @@ public class Knight extends Piece {
 	public void move() {
 		// TODO Auto-generated method stub
 
-	}
-	
-	@Override
-	public char getShortName() {
-		return 'N';
 	}
 
 	@Override

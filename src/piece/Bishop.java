@@ -1,14 +1,18 @@
+package piece;
 import java.util.ArrayList;
 
-public class Rook extends Piece {
+import orchestration.Space;
+import orchestration.Team;
 
-	public Rook(Team team) {
+public class Bishop extends Piece {
+
+	public Bishop(Team team) {
 		super(team);
 	}
 
 	@Override
 	public void move() {
-		
+
 	}
 
 	@Override

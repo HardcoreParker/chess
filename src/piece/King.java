@@ -1,13 +1,19 @@
+package piece;
 import java.util.ArrayList;
 
-public class Bishop extends Piece {
+import orchestration.Space;
+import orchestration.Team;
 
-	public Bishop(Team team) {
+public class King extends Piece {
+
+	public King(Team team) {
 		super(team);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void move() {
+		// TODO Auto-generated method stub
 
 	}
 

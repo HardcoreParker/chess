@@ -1,5 +1,10 @@
+package piece;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+import orchestration.Board;
+import orchestration.Space;
+import orchestration.Team;
 
 public class Pawn extends Piece {
 
