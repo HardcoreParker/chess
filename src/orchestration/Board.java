@@ -142,10 +142,10 @@ public class Board {
 				next = calculateRight(next);
 			}
 			
-			if(isSpaceEmpty(next)) {
+			if(isSpaceEmpty(next) && next != null) {
 				list.add(next);
 			} else {
-				next = null;
+				next = null; // Space was occupied, nulling out next will fail the conditional
 			}
 		}
 		return list;
@@ -189,7 +189,7 @@ public class Board {
 	}
 	
 	public static boolean isSpaceOccupiedByEnemy(Space space, Team team) {
-		return board.get(space) != null && board.get(space).getTeam() != team;
+		return !isSpaceEmpty(space) && board.get(space).getTeam() != team;
 	}
 	
 	private static Space calculateSpace(char column, int row) {

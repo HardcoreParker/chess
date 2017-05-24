@@ -1,6 +1,7 @@
 package piece;
 import java.util.ArrayList;
 
+import orchestration.Board;
 import orchestration.Space;
 import orchestration.Team;
 
@@ -17,8 +18,14 @@ public class Rook extends Piece {
 
 	@Override
 	public ArrayList<Space> calculateValidMoves(Space origin) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Space> validMoves = new ArrayList<>();
+
+		validMoves.addAll(Board.walkBoardUntilNextSpaceUnavailable(origin, "N"));
+		validMoves.addAll(Board.walkBoardUntilNextSpaceUnavailable(origin, "S"));
+		validMoves.addAll(Board.walkBoardUntilNextSpaceUnavailable(origin, "E"));
+		validMoves.addAll(Board.walkBoardUntilNextSpaceUnavailable(origin, "W"));
+		
+		return validMoves;
 	}
 
 }
