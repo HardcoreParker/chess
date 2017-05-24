@@ -142,6 +142,8 @@ public class Board {
 			
 			if(isSpaceEmpty(next)) {
 				list.add(next);
+			} else {
+				next = null;
 			}
 		}
 		return list;
@@ -170,16 +172,18 @@ public class Board {
 				next = calculateRight(next);
 			}
 			
-			if(!isSpaceEmpty(next)) {
+			if(isSpaceEmpty(next)) {
 				list.add(next);
 				times--;
+			} else {
+				next = null;
 			}
 		}
 		return list;
 	}
 	
 	public static boolean isSpaceEmpty(Space space) {
-		return board.get(space) != null;
+		return board.get(space) == null;
 	}
 	
 	public static boolean isSpaceOccupiedByEnemy(Space space, Team team) {

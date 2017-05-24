@@ -3,7 +3,7 @@ import java.util.LinkedHashMap;
 
 public class Pawn extends Piece {
 
-	private boolean hasAlreadyMoved = false;
+	private boolean hasMoved = false;
 	
 	public Pawn(Team team) {
 		super(team);
@@ -15,7 +15,11 @@ public class Pawn extends Piece {
 
 	@Override
 	public ArrayList<Space> calculateValidMoves(Space origin) {
-		return calculateSpacesPawnCanMoveTo(origin, hasAlreadyMoved);
+		return calculateSpacesPawnCanMoveTo(origin, hasMoved);
+	}
+	
+	public void setHasMoved(boolean hasMoved) {
+		this.hasMoved = hasMoved;
 	}
 	
 	private ArrayList<Space> calculateSpacesPawnCanMoveTo(Space origin, boolean hasAlreadyMoved) {
