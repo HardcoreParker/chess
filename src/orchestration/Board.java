@@ -41,7 +41,7 @@ public class Board {
 	}
 	// is this right, should we be returning the actual enum or the value of the board hashmap - YES, it's right. 
 	// We will use the value of 'up' to compare to valid move sets, which will be ran against the state of the board 
-	public static Space calculateUp(Space origin) {
+	public static Space calculateN(Space origin) {
 		if(origin.getRow() < 8) {
 			int newRow = origin.getRow() + 1;
 			
@@ -51,7 +51,7 @@ public class Board {
 		}
 	}
 
-	public static Space calculateDown(Space origin) {
+	public static Space calculateS(Space origin) {
 		if(origin.getRow() > 1) {
 			int newRow = origin.getRow() - 1;
 			
@@ -61,7 +61,7 @@ public class Board {
 		}
 	}
 	
-	public static Space calculateLeft(Space origin) {
+	public static Space calculateW(Space origin) {
 		if(isLeftColumn(origin.getColumn())) {
 			return null;
 		}
@@ -70,7 +70,7 @@ public class Board {
 		return calculateSpace(newColumn, origin.getRow());
 	}
 
-	public static Space calculateRight(Space origin) {
+	public static Space calculateE(Space origin) {
 		if(isRightColumn(origin.getColumn())) {
 			return null;
 		}
@@ -133,13 +133,13 @@ public class Board {
 			} else if(direction.equals("SW")) {
 				next = calculateDiagonalSW(next);
 			} else if(direction.equals("N")) {
-				next = calculateUp(next);
+				next = calculateN(next);
 			} else if(direction.equals("S")) {
-				next = calculateDown(next);
+				next = calculateS(next);
 			} else if(direction.equals("W")) {
-				next = calculateLeft(next);
+				next = calculateW(next);
 			} else if(direction.equals("E")) {
-				next = calculateRight(next);
+				next = calculateE(next);
 			}
 			
 			if(isSpaceEmpty(next) && next != null) {
@@ -171,13 +171,13 @@ public class Board {
 			} else if(direction.equals("SW")) {
 				next = calculateDiagonalSW(next);
 			} else if(direction.equals("N")) {
-				next = calculateUp(next);
+				next = calculateN(next);
 			} else if(direction.equals("S")) {
-				next = calculateDown(next);
+				next = calculateS(next);
 			} else if(direction.equals("W")) {
-				next = calculateLeft(next);
+				next = calculateW(next);
 			} else if(direction.equals("E")) {
-				next = calculateRight(next);
+				next = calculateE(next);
 			}
 			
 			if(isSpaceEmpty(next)) {

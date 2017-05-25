@@ -10,7 +10,7 @@ public class BoardTest {
 
 	@Test
 	public void calculateUp_Test() {
-		Space actual = Board.calculateUp(Space.A1);
+		Space actual = Board.calculateN(Space.A1);
 		Space expected = Space.A2;
 		
 		assertEquals(expected, actual);
@@ -18,21 +18,21 @@ public class BoardTest {
 	
 	@Test
 	public void calculateDown_Test() {
-		Space actual = Board.calculateDown(Space.A2);
+		Space actual = Board.calculateS(Space.A2);
 		Space expected = Space.A1;
 		
 		assertEquals(expected, actual);
 	}
 	@Test
 	public void calculateUp_FromTopOfBoard_Test() {
-		Space actual = Board.calculateUp(Space.A8);
+		Space actual = Board.calculateN(Space.A8);
 		Space expected = null;
 		
 		assertEquals(expected, actual);
 	}
 	@Test
 	public void calculateDown_FromBottomOfBoard_Test() {
-		Space actual = Board.calculateDown(Space.A1);
+		Space actual = Board.calculateS(Space.A1);
 		Space expected = null;
 		
 		assertEquals(expected, actual);
@@ -40,14 +40,14 @@ public class BoardTest {
 	
 	@Test
 	public void calculateLeft_Test() {
-		Space actual = Board.calculateLeft(Space.D4);
+		Space actual = Board.calculateW(Space.D4);
 		Space expected = Space.C4;
 		
 		assertEquals(expected, actual);
 	}
 	@Test
 	public void calculateRight_Test() {
-		Space actual = Board.calculateRight(Space.D4);
+		Space actual = Board.calculateE(Space.D4);
 		Space expected = Space.E4;
 		
 		assertEquals(expected, actual);
@@ -55,14 +55,14 @@ public class BoardTest {
 	
 	@Test
 	public void calculateLeft_OutOfBounds_Test() {
-		Space actual = Board.calculateLeft(Space.A1);
+		Space actual = Board.calculateW(Space.A1);
 		Space expected = null;
 		
 		assertEquals(expected, actual);
 	}
 	@Test
 	public void calculateRight_OutOfBounds_Test() {
-		Space actual = Board.calculateRight(Space.H1);
+		Space actual = Board.calculateE(Space.H1);
 		Space expected = null;
 		
 		assertEquals(expected, actual);
