@@ -46,6 +46,34 @@ public class RookTest {
 		assert(validMoves.contains(Space.H5));
 	}
 	
+	@Test
+	public void rook_cant_move_through_friendlies_test() {
+		board.put(Space.D6, new Pawn(Team.WHITE));
+		board.put(Space.C5, new Pawn(Team.WHITE));
+		board.put(Space.E5, new Pawn(Team.WHITE));
+		board.put(Space.D4, new Pawn(Team.WHITE));
+		
+		ArrayList<Space> validMoves = testRook.calculateValidMoves(origin);
+		
+		assert(validMoves.size() == 0);
+	}
+	
+	@Test
+	public void rook_can_take_enemeies_in_4_directions_test() {
+		board.put(Space.D6, new Pawn(Team.BLACK));
+		board.put(Space.C5, new Pawn(Team.BLACK));
+		board.put(Space.E5, new Pawn(Team.BLACK));
+		board.put(Space.D4, new Pawn(Team.BLACK));
+		
+		ArrayList<Space> validMoves = testRook.calculateValidMoves(origin);
+		
+		assert(validMoves.size() == 4);
+		assert(validMoves.contains(Space.D6));
+		assert(validMoves.contains(Space.C5));
+		assert(validMoves.contains(Space.E5));
+		assert(validMoves.contains(Space.D4));
+	}
+	
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {
 		Board board = new Board();
 		LinkedHashMap<Space, Piece> boardMap = board.getBoard();

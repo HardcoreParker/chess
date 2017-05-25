@@ -144,8 +144,14 @@ public class Board {
 			
 			if(isSpaceEmpty(next) && next != null) {
 				list.add(next);
-			} else {
-				next = null; // Space was occupied, nulling out next will fail the conditional
+			} else if (!isSpaceEmpty(next) && 
+						board.get(origin).getShortName() != 'P' && 
+						isSpaceOccupiedByEnemy(next, board.get(origin).getTeam())) {
+				list.add(next); // The space can be taken
+				break; // Stop walking the board in that direction
+			}
+				else {
+				next = null; // Space was occupied by friendly, nulling out next will fail the conditional
 			}
 		}
 		return list;
