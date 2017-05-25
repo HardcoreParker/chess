@@ -119,7 +119,7 @@ public class Board {
 		return calculateSpace(newColumn, newRow);
 	}
 	
-	public static ArrayList<Space> walkBoardUntilNextSpaceUnavailable(Space origin, String direction) {
+	public static ArrayList<Space> walkBoardUntilNextSpaceUnavailable(Space origin, Direction direction) {
 		ArrayList<Space> list = new ArrayList<Space>();
 		Space next = origin;
 		while(next != null) {
@@ -141,7 +141,7 @@ public class Board {
 		return list;
 	}
 	
-	public static ArrayList<Space> walkBoardUntilNextSpaceUnavailable(Space origin, String direction, int times) {
+	public static ArrayList<Space> walkBoardUntilNextSpaceUnavailable(Space origin, Direction direction, int times) {
 		ArrayList<Space> list = new ArrayList<Space>();
 		Space next = origin;
 		while(next != null && times > 0) {
@@ -166,22 +166,22 @@ public class Board {
 		return !isSpaceEmpty(space) && board.get(space).getTeam() != team;
 	}
 	
-	private static Space calculateDirection(String direction, Space next) {
-		if(direction.equals("NE")) {
+	private static Space calculateDirection(Direction direction, Space next) {
+		if(direction.equals(Direction.NE)) {
 			next = calculateDiagonalNE(next);
-		} else if(direction.equals("NW")) {
+		} else if(direction.equals(Direction.NW)) {
 			next = calculateDiagonalNW(next);
-		} else if(direction.equals("SE")) {
+		} else if(direction.equals(Direction.NW)) {
 			next = calculateDiagonalSE(next);
-		} else if(direction.equals("SW")) {
+		} else if(direction.equals(Direction.SW)) {
 			next = calculateDiagonalSW(next);
-		} else if(direction.equals("N")) {
+		} else if(direction.equals(Direction.N)) {
 			next = calculateN(next);
-		} else if(direction.equals("S")) {
+		} else if(direction.equals(Direction.S)) {
 			next = calculateS(next);
-		} else if(direction.equals("W")) {
+		} else if(direction.equals(Direction.W)) {
 			next = calculateW(next);
-		} else if(direction.equals("E")) {
+		} else if(direction.equals(Direction.E)) {
 			next = calculateE(next);
 		}
 		return next;

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import orchestration.Board;
+import orchestration.Direction;
 import orchestration.Space;
 import orchestration.Team;
 
@@ -33,10 +34,10 @@ public class Pawn extends Piece {
 		int times = hasAlreadyMoved ? 1 : 2;
 		
 		if(this.getTeam() == Team.WHITE) {
-			list.addAll(Board.walkBoardUntilNextSpaceUnavailable(origin, "N", times));
+			list.addAll(Board.walkBoardUntilNextSpaceUnavailable(origin, Direction.N, times));
 			hasAlreadyMoved = true;
 		} else {
-			list.addAll(Board.walkBoardUntilNextSpaceUnavailable(origin, "S", times));
+			list.addAll(Board.walkBoardUntilNextSpaceUnavailable(origin, Direction.S, times));
 			hasAlreadyMoved = true;
 		}
 		
