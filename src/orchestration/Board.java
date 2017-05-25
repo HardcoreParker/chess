@@ -124,23 +124,7 @@ public class Board {
 		Space next = origin;
 		while(next != null) {
 			
-			if(direction.equals("NE")) {
-				next = calculateDiagonalNE(next);
-			} else if(direction.equals("NW")) {
-				next = calculateDiagonalNW(next);
-			} else if(direction.equals("SE")) {
-				next = calculateDiagonalSE(next);
-			} else if(direction.equals("SW")) {
-				next = calculateDiagonalSW(next);
-			} else if(direction.equals("N")) {
-				next = calculateN(next);
-			} else if(direction.equals("S")) {
-				next = calculateS(next);
-			} else if(direction.equals("W")) {
-				next = calculateW(next);
-			} else if(direction.equals("E")) {
-				next = calculateE(next);
-			}
+			next = calculateDirection(direction, next);
 			
 			if(isSpaceEmpty(next) && next != null) {
 				list.add(next);
@@ -162,23 +146,7 @@ public class Board {
 		Space next = origin;
 		while(next != null && times > 0) {
 			
-			if(direction.equals("NE")) {
-				next = calculateDiagonalNE(next);
-			} else if(direction.equals("NW")) {
-				next = calculateDiagonalNW(next);
-			} else if(direction.equals("SE")) {
-				next = calculateDiagonalSE(next);
-			} else if(direction.equals("SW")) {
-				next = calculateDiagonalSW(next);
-			} else if(direction.equals("N")) {
-				next = calculateN(next);
-			} else if(direction.equals("S")) {
-				next = calculateS(next);
-			} else if(direction.equals("W")) {
-				next = calculateW(next);
-			} else if(direction.equals("E")) {
-				next = calculateE(next);
-			}
+			next = calculateDirection(direction, next);
 			
 			if(isSpaceEmpty(next)) {
 				list.add(next);
@@ -196,6 +164,27 @@ public class Board {
 	
 	public static boolean isSpaceOccupiedByEnemy(Space space, Team team) {
 		return !isSpaceEmpty(space) && board.get(space).getTeam() != team;
+	}
+	
+	private static Space calculateDirection(String direction, Space next) {
+		if(direction.equals("NE")) {
+			next = calculateDiagonalNE(next);
+		} else if(direction.equals("NW")) {
+			next = calculateDiagonalNW(next);
+		} else if(direction.equals("SE")) {
+			next = calculateDiagonalSE(next);
+		} else if(direction.equals("SW")) {
+			next = calculateDiagonalSW(next);
+		} else if(direction.equals("N")) {
+			next = calculateN(next);
+		} else if(direction.equals("S")) {
+			next = calculateS(next);
+		} else if(direction.equals("W")) {
+			next = calculateW(next);
+		} else if(direction.equals("E")) {
+			next = calculateE(next);
+		}
+		return next;
 	}
 	
 	private static Space calculateSpace(char column, int row) {
