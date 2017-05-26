@@ -171,7 +171,7 @@ public class Board {
 			next = calculateDiagonalNE(next);
 		} else if(direction.equals(Direction.NW)) {
 			next = calculateDiagonalNW(next);
-		} else if(direction.equals(Direction.NW)) {
+		} else if(direction.equals(Direction.SE)) {
 			next = calculateDiagonalSE(next);
 		} else if(direction.equals(Direction.SW)) {
 			next = calculateDiagonalSW(next);
