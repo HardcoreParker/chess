@@ -69,4 +69,9 @@ public class Pawn extends Piece {
 				!Board.isSpaceEmpty(space) && 
 				Board.isSpaceOccupiedByEnemy(space, team);
 	}
+
+	@Override
+	public char getShortName() {
+		return 'P';
+	}
 }

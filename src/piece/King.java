@@ -23,4 +23,9 @@ public class King extends Piece {
 		return null;
 	}
 
+	@Override
+	public char getShortName() {
+		return 'K';
+	}
+
 }

@@ -14,9 +14,8 @@ public abstract class Piece {
 		setTeam(team);
 	}
 
-	public char getShortName() {
-		return this.toString().charAt(0);
-	}
+	public abstract char getShortName();
+	
 	public String getPaintedName() {
 		return this.getTeam().getColor() + this.getShortName();
 	}

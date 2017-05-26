@@ -29,4 +29,9 @@ public class Rook extends Piece {
 		return validMoves;
 	}
 
+	@Override
+	public char getShortName() {
+		return 'R';
+	}
+
 }

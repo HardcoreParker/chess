@@ -21,4 +21,9 @@ public class Bishop extends Piece {
 		return null;
 	}
 
+	@Override
+	public char getShortName() {
+		return 'B';
+	}
+
 }
