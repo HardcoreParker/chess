@@ -39,84 +39,89 @@ public class Board {
 		result.append("|");
 		return result.toString();
 	}
-	// is this right, should we be returning the actual enum or the value of the board hashmap - YES, it's right. 
-	// We will use the value of 'up' to compare to valid move sets, which will be ran against the state of the board 
+	
 	public static Space calculateN(Space origin) {
-		if(origin.getRow() < 8) {
+		if(isTopRow(origin.getRow())) {
+			return null;
+		} else {
 			int newRow = origin.getRow() + 1;
 			
 			return calculateSpace(origin.getColumn(), newRow);
-		} else {
-			return null;
 		}
 	}
 
 	public static Space calculateS(Space origin) {
-		if(origin.getRow() > 1) {
+		if(isBottomRow(origin.getRow())) {
+			return null;
+		} else {
 			int newRow = origin.getRow() - 1;
 			
 			return calculateSpace(origin.getColumn(), newRow);
-		} else {
-			return null;
 		}
 	}
 	
 	public static Space calculateW(Space origin) {
 		if(isLeftColumn(origin.getColumn())) {
 			return null;
+		} else {
+			char newColumn = (char) (origin.getColumn() - 1);
+			
+			return calculateSpace(newColumn, origin.getRow());
 		}
-		char newColumn = (char) (origin.getColumn() - 1);
-		
-		return calculateSpace(newColumn, origin.getRow());
 	}
 
 	public static Space calculateE(Space origin) {
 		if(isRightColumn(origin.getColumn())) {
 			return null;
+		} else {
+			char newColumn = (char) (origin.getColumn() + 1);
+			
+			return calculateSpace(newColumn, origin.getRow());
 		}
-		char newColumn = (char) (origin.getColumn() + 1);
-		
-		return calculateSpace(newColumn, origin.getRow());
 	}
 
 	public static Space calculateDiagonalNE(Space origin) {
 		if(isTopRow(origin.getRow()) || isRightColumn(origin.getColumn())) {
 			return null;
+		} else {
+			char newColumn = (char) (origin.getColumn() + 1);
+			int newRow = origin.getRow() + 1;
+			
+			return calculateSpace(newColumn, newRow);
 		}
-		char newColumn = (char) (origin.getColumn() + 1);
-		int newRow = origin.getRow() + 1;
-		
-		return calculateSpace(newColumn, newRow);
 	}
 
 	public static Space calculateDiagonalSE(Space origin) {
 		if(isBottomRow(origin.getRow()) || isRightColumn(origin.getColumn())) {
 			return null;
+		} else {
+			char newColumn = (char) (origin.getColumn() + 1);
+			int newRow = origin.getRow() - 1;
+			
+			return calculateSpace(newColumn, newRow);
 		}
-		char newColumn = (char) (origin.getColumn() + 1);
-		int newRow = origin.getRow() - 1;
-		
-		return calculateSpace(newColumn, newRow);
 	}
 
 	public static Space calculateDiagonalNW(Space origin) {
 		if(isTopRow(origin.getRow()) || isLeftColumn(origin.getColumn())) {
 			return null;
+		} else {
+			char newColumn = (char) (origin.getColumn() - 1);
+			int newRow = origin.getRow() + 1;
+			
+			return calculateSpace(newColumn, newRow);
 		}
-		char newColumn = (char) (origin.getColumn() - 1);
-		int newRow = origin.getRow() + 1;
-		
-		return calculateSpace(newColumn, newRow);
 	}
 
 	public static Space calculateDiagonalSW(Space origin) {
 		if(isBottomRow(origin.getRow()) || isLeftColumn(origin.getColumn())) {
 			return null;
+		} else {
+			char newColumn = (char) (origin.getColumn() - 1);
+			int newRow = origin.getRow() - 1;
+			
+			return calculateSpace(newColumn, newRow);
 		}
-		char newColumn = (char) (origin.getColumn() - 1);
-		int newRow = origin.getRow() - 1;
-		
-		return calculateSpace(newColumn, newRow);
 	}
 	
 	public static ArrayList<Space> walkBoardUntilNextSpaceUnavailable(Space origin, Direction direction) {
