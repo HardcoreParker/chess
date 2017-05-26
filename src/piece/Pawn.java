@@ -16,10 +16,6 @@ public class Pawn extends Piece {
 	}
 
 	@Override
-	public void move() {
-	}
-
-	@Override
 	public ArrayList<Space> calculateValidMoves(Space origin) {
 		return calculateSpacesPawnCanMoveTo(origin, hasMoved);
 	}

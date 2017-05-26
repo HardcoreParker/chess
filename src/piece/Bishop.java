@@ -11,11 +11,6 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public void move() {
-
-	}
-
-	@Override
 	public ArrayList<Space> calculateValidMoves(Space origin) {
 		// TODO Auto-generated method stub
 		return null;

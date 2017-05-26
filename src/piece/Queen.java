@@ -12,12 +12,6 @@ public class Queen extends Piece {
 	}
 
 	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public ArrayList<Space> calculateValidMoves(Space origin) {
 		// TODO Auto-generated method stub
 		return null;

@@ -13,11 +13,6 @@ public class Rook extends Piece {
 	}
 
 	@Override
-	public void move() {
-		
-	}
-
-	@Override
 	public ArrayList<Space> calculateValidMoves(Space origin) {
 		ArrayList<Space> validMoves = new ArrayList<>();
 
