@@ -9,4 +9,6 @@ public enum Direction {
 	NW(),
 	SW(),
 	SE();
+	
+	// TODO - Consider putting static direction calculations in this enum
 }

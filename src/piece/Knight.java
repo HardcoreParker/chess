@@ -22,12 +22,46 @@ public class Knight extends Piece {
 	public ArrayList<Space> calculateValidMoves(Space origin) {
 		ArrayList<Space> validMoves = new ArrayList<>();
 
-		Space twiceNorth = (Board.calculateN(Board.calculateN(origin)));
-		Space twiceSouth = (Board.calculateS(Board.calculateS(origin)));
-		Space twiceEast = (Board.calculateE(Board.calculateE(origin)));
-		Space twiceWest = (Board.calculateW(Board.calculateW(origin)));
+		
+		// In progress brute force attempt at figuring this out. Should look into handling this with errors and not null pointers
+		Space n = Board.calculateN(origin);
+		Space twiceN = null;
+		if(n != null) {
+			twiceN = Board.calculateN(n);
+			if(twiceN != null) {
+				Space NNE = Board.calculateE(twiceN);
+				Space NNW = Board.calculateW(twiceN);
+				if(NNE != null && !Board.isSpaceOccupiedByEnemy(NNE, this.getTeam())) {
+					validMoves.add(NNE);
+				}
+				if(NNW != null && !Board.isSpaceOccupiedByEnemy(NNW, this.getTeam())) {
+					validMoves.add(NNW);
+				}
+			}
+		}
+		
+		
+		
+		Space s = Board.calculateS(origin);
+		Space twiceS = null;
+		if(s != null) {
+			twiceS = Board.calculateS(s);
+		}
+
+		Space e = Board.calculateE(origin);
+		Space twiceE = null;
+		if(e != null) {
+			twiceE = Board.calculateE(e);
+		}
+
+		Space w = Board.calculateW(origin);
+		Space twiceW;
+		if(w != null) {
+			twiceW = Board.calculateW(w);
+		}
+		
+		
 		
 		return validMoves;
 	}
-
 }
