@@ -2,6 +2,8 @@ package orchestration;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import exception.NoKingFoundException;
+import piece.King;
 import piece.Piece;
 
 public class Board {
@@ -134,7 +136,6 @@ public class Board {
 			if(isSpaceEmpty(next) && next != null) {
 				list.add(next);
 			} else if (!isSpaceEmpty(next) && 
-						board.get(origin).getShortName() != 'P' && 
 						isSpaceOccupiedByEnemy(next, board.get(origin).getTeam())) {
 				list.add(next); // The space can be taken
 				break; // Stop walking the board in that direction
@@ -213,5 +214,48 @@ public class Board {
 	}
 	private String getEmptySpace() {
 		return BOARD_COLOR + "_";
+	}
+	
+	private static Space findKing(Team team) throws NoKingFoundException {
+		for(Space space : board.keySet()) {
+			if(board.get(space) != null && board.get(space).getClass().equals(King.class) && board.get(space).getTeam() == team) {
+				return space;
+			}
+		}
+		throw new NoKingFoundException();
+	}
+
+	public static boolean isTeamInCheck(Team team) throws NoKingFoundException {
+		Space kingSpace = findKing(team);
+		ArrayList<Space> opposingTeamValidMoves = getAllOpposingTeamMoves(team);
+		
+		if(opposingTeamValidMoves.contains(kingSpace)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static ArrayList<Space> getAllOpposingTeamMoves(Team team) {
+		ArrayList<Space> opposingTeamValidMoves = new ArrayList<>();
+		Team opposingTeam = null;
+		if(team.equals(Team.WHITE)) {
+			opposingTeam = Team.BLACK;
+		} else if(team.equals(Team.BLACK)){
+			opposingTeam = Team.WHITE;
+		}
+
+		for(Space space : board.keySet()) {
+			if(board.get(space) != null && board.get(space).getTeam().equals(opposingTeam)) {
+				opposingTeamValidMoves.addAll(board.get(space).calculateValidMoves(space));
+			}
+		}
+		
+		return opposingTeamValidMoves;
+	}
+	
+	public static boolean isTeamInCheckmate(Team team) {
+		// TODO - Stub
+		return false;
 	}
 }
