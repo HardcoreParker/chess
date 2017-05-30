@@ -40,7 +40,7 @@ public class KnightTest {
 		
 		ArrayList<Space> validMoves = testKnight.calculateValidMoves(origin);
 		
-		assert(validMoves.size() == 4);
+		assert(validMoves.size() == 8);
 		
 		assert(validMoves.contains(Space.C6));
 		assert(validMoves.contains(Space.B5));

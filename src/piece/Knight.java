@@ -22,8 +22,6 @@ public class Knight extends Piece {
 	public ArrayList<Space> calculateValidMoves(Space origin) {
 		ArrayList<Space> validMoves = new ArrayList<>();
 
-		
-		// In progress brute force attempt at figuring this out. Should look into handling this with errors and not null pointers
 		Space n = Board.calculateN(origin);
 		Space twiceN = null;
 		if(n != null) {
@@ -31,36 +29,62 @@ public class Knight extends Piece {
 			if(twiceN != null) {
 				Space NNE = Board.calculateE(twiceN);
 				Space NNW = Board.calculateW(twiceN);
-				if(NNE != null && !Board.isSpaceOccupiedByEnemy(NNE, this.getTeam())) {
+				if(NNE != null || Board.isSpaceOccupiedByEnemy(NNE, this.getTeam())) {
 					validMoves.add(NNE);
 				}
-				if(NNW != null && !Board.isSpaceOccupiedByEnemy(NNW, this.getTeam())) {
+				if(NNW != null || Board.isSpaceOccupiedByEnemy(NNW, this.getTeam())) {
 					validMoves.add(NNW);
 				}
 			}
 		}
 		
-		
-		
 		Space s = Board.calculateS(origin);
 		Space twiceS = null;
 		if(s != null) {
 			twiceS = Board.calculateS(s);
+			if(twiceS != null) {
+				Space SSE = Board.calculateE(twiceS);
+				Space SSW = Board.calculateW(twiceS);
+				if(SSE != null || Board.isSpaceOccupiedByEnemy(SSE, this.getTeam())) {
+					validMoves.add(SSE);
+				}
+				if(SSW != null || Board.isSpaceOccupiedByEnemy(SSW, this.getTeam())) {
+					validMoves.add(SSW);
+				}
+			}
 		}
 
 		Space e = Board.calculateE(origin);
 		Space twiceE = null;
 		if(e != null) {
 			twiceE = Board.calculateE(e);
+			if(twiceE != null) {
+				Space EEN = Board.calculateN(twiceE);
+				Space EES = Board.calculateS(twiceE);
+				if(EEN != null || !Board.isSpaceOccupiedByEnemy(EEN, this.getTeam())) {
+					validMoves.add(EEN);
+				}
+				if(EES != null || !Board.isSpaceOccupiedByEnemy(EES, this.getTeam())) {
+					validMoves.add(EES);
+				}
+			}
 		}
 
 		Space w = Board.calculateW(origin);
 		Space twiceW;
 		if(w != null) {
 			twiceW = Board.calculateW(w);
+			if(twiceW != null) {
+				Space WWN = Board.calculateN(twiceW);
+				Space WWS = Board.calculateS(twiceW);
+				if(WWN != null || !Board.isSpaceOccupiedByEnemy(WWN, this.getTeam())) {
+					validMoves.add(WWN);
+				}
+				if(WWS != null || !Board.isSpaceOccupiedByEnemy(WWS, this.getTeam())) {
+					validMoves.add(WWS);
+				}
+			}
 		}
-		
-		
 		
 		return validMoves;
 	}
