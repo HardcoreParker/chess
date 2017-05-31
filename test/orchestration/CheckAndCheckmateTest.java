@@ -113,7 +113,12 @@ public class CheckAndCheckmateTest {
 		board.put(Space.C3, new Knight(Team.BLACK));
 		board.put(Space.C2, new Rook(Team.BLACK));
 		
-		assertTrue(Board.isTeamInCheckmate(Team.WHITE));
+		try {
+			assertTrue(Board.isTeamInCheck(Team.WHITE));
+		} catch (NoKingFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {

@@ -134,6 +134,44 @@ public class KingTest {
 		ArrayList<Space> validMoves = testKing.calculateValidMoves(origin);
 		assert(validMoves.size() == 0);
 	}
+	
+	@Test
+	public void calculate_opposing_team_threats_test() {
+		Space originWhite = Space.F5;
+		Space originBlack = Space.D5;
+		King testKingWhite;
+		King testKingBlack;
+		
+		board.put(originWhite, new King(Team.WHITE));
+		board.put(originBlack, new King(Team.BLACK));
+		testKingWhite = (King) board.get(originWhite);
+		testKingBlack = (King) board.get(originBlack);
+		
+		ArrayList<Space> spacesWhiteKingCanThreaten = testKingWhite.calculateSpacesKingCanThreaten(originWhite);
+		ArrayList<Space> spacesBlackKingCanThreaten = testKingBlack.calculateSpacesKingCanThreaten(originBlack);
+		
+		assert(spacesWhiteKingCanThreaten.size() == 8);
+		
+		assert(spacesWhiteKingCanThreaten.contains(Space.E6));
+		assert(spacesWhiteKingCanThreaten.contains(Space.F6));
+		assert(spacesWhiteKingCanThreaten.contains(Space.G6));
+		assert(spacesWhiteKingCanThreaten.contains(Space.E5));
+		assert(spacesWhiteKingCanThreaten.contains(Space.E4));
+		assert(spacesWhiteKingCanThreaten.contains(Space.F4));
+		assert(spacesWhiteKingCanThreaten.contains(Space.G5));
+		assert(spacesWhiteKingCanThreaten.contains(Space.G4));
+		
+		assert(spacesBlackKingCanThreaten.size() == 8);
+		
+		assert(spacesBlackKingCanThreaten.contains(Space.E6));
+		assert(spacesBlackKingCanThreaten.contains(Space.E5));
+		assert(spacesBlackKingCanThreaten.contains(Space.E4));
+		assert(spacesBlackKingCanThreaten.contains(Space.D4));
+		assert(spacesBlackKingCanThreaten.contains(Space.C4));
+		assert(spacesBlackKingCanThreaten.contains(Space.C5));
+		assert(spacesBlackKingCanThreaten.contains(Space.C6));
+		assert(spacesBlackKingCanThreaten.contains(Space.D6));
+	}
 
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {
 		Board board = new Board();
