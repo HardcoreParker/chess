@@ -81,11 +81,7 @@ public class CheckAndCheckmateTest {
 		boardMap.put(Space.F3, new Pawn(Team.WHITE));
 		boardMap.put(Space.G4, new Pawn(Team.WHITE));
 		
-		try {
-			assertTrue(Board.isTeamInCheck(Team.WHITE));
-		} catch (NoKingFoundException e) {
-			assert(false);
-		}
+		assertTrue(Board.isTeamInCheckmate(Team.WHITE));
 	}
 	
 	@Test
@@ -95,11 +91,7 @@ public class CheckAndCheckmateTest {
 		board.put(Space.F5, new King(Team.WHITE));
 		board.put(Space.H1, new Rook(Team.WHITE));
 		
-		try {
-			assertTrue(Board.isTeamInCheck(Team.WHITE));
-		} catch (NoKingFoundException e) {
-			assert(false);
-		}
+		assertTrue(Board.isTeamInCheckmate(Team.WHITE));
 	}
 	
 	@Test
@@ -121,11 +113,7 @@ public class CheckAndCheckmateTest {
 		board.put(Space.C3, new Knight(Team.BLACK));
 		board.put(Space.C2, new Rook(Team.BLACK));
 		
-		try {
-			assertTrue(Board.isTeamInCheck(Team.WHITE));
-		} catch (NoKingFoundException e) {
-			assert(false);
-		}
+		assertTrue(Board.isTeamInCheckmate(Team.WHITE));
 	}
 	
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {
