@@ -155,7 +155,8 @@ public class Board {
 	}
 	
 	public static boolean isTeamInCheckmate(Team team) {
-		// TODO - Stub
+		// TODO - Implement checkmate
+		
 		return false;
 	}
 }
