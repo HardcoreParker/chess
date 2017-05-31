@@ -9,18 +9,11 @@ public class Game {
 	
 	private static Board board = new Board();
 	private static boolean checkMate = false;
-	private static int teamFlip = 1;
+	private static Team team = Team.WHITE;
 	
 	public static void main(String[] args) {	
 		while(!checkMate) {
 			System.out.println(board.toString());
-			
-			Team team = null;
-			if(teamFlip > 1) {
-				team = Team.WHITE;
-			} else {
-				team = Team.BLACK;
-			}
 			
 			System.out.println(team.toString() + " player's move");
 
@@ -41,7 +34,7 @@ public class Game {
 				if(success == false) {
 					System.out.println("That move isn't possible. Try again "+team);
 				} else {
-					teamFlip = teamFlip * -1;
+					team = Team.getOpposingTeam(team);
 				}
 			} catch(IllegalArgumentException ex) {
 				System.out.println("Try again, one of those inputs isn't correct");

@@ -11,4 +11,12 @@ public enum Team {
 	public String getColor() {
 		return this.color;
 	}
+	
+	public static Team getOpposingTeam(Team team) {
+		if(team.equals(Team.WHITE)) {
+			return Team.BLACK;
+		} else {
+			return Team.WHITE;
+		}
+	}
 }

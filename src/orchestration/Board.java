@@ -239,17 +239,10 @@ public class Board {
 
 	public static ArrayList<Space> getAllOpposingTeamsPotentialMoves(Team team) {
 		ArrayList<Space> opposingTeamValidMoves = new ArrayList<>();
-		// TODO - extract opposing team calc to static method
-		Team opposingTeam = null;
-		if(team.equals(Team.WHITE)) {
-			opposingTeam = Team.BLACK;
-		} else if(team.equals(Team.BLACK)){
-			opposingTeam = Team.WHITE;
-		}
 
 		for(Space space : board.keySet()) {
 			Piece piece = board.get(space);
-			if(piece != null && piece.getTeam().equals(opposingTeam)) {
+			if(piece != null && piece.getTeam().equals(Team.getOpposingTeam(team))) {
 				if(piece.getClass() == Pawn.class) { // Since we're only using this to calculate check and checkmates, we only calculate a pawn's offensive moves
 					opposingTeamValidMoves.addAll(((Pawn) piece).calculateSpacesPawnCanThreaten(space));
 				} else {
