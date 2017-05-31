@@ -20,10 +20,10 @@ public class King extends Piece {
 		validMoves.add(Board.calculateS(origin));
 		validMoves.add(Board.calculateE(origin));
 		validMoves.add(Board.calculateW(origin));
-		validMoves.add(Board.calculateDiagonalNE(origin));
-		validMoves.add(Board.calculateDiagonalNW(origin));
-		validMoves.add(Board.calculateDiagonalSE(origin));
-		validMoves.add(Board.calculateDiagonalSW(origin));
+		validMoves.add(Board.calculateNE(origin));
+		validMoves.add(Board.calculateNW(origin));
+		validMoves.add(Board.calculateSE(origin));
+		validMoves.add(Board.calculateSW(origin));
 		
 		
 		ArrayList<Space> allOpposingTeamMoves = Board.getAllOpposingTeamsPotentialMoves(this.getTeam());

@@ -83,7 +83,7 @@ public class Board {
 		}
 	}
 
-	public static Space calculateDiagonalNE(Space origin) {
+	public static Space calculateNE(Space origin) {
 		if(isTopRow(origin.getRow()) || isRightColumn(origin.getColumn())) {
 			return null;
 		} else {
@@ -94,7 +94,7 @@ public class Board {
 		}
 	}
 
-	public static Space calculateDiagonalSE(Space origin) {
+	public static Space calculateSE(Space origin) {
 		if(isBottomRow(origin.getRow()) || isRightColumn(origin.getColumn())) {
 			return null;
 		} else {
@@ -105,7 +105,7 @@ public class Board {
 		}
 	}
 
-	public static Space calculateDiagonalNW(Space origin) {
+	public static Space calculateNW(Space origin) {
 		if(isTopRow(origin.getRow()) || isLeftColumn(origin.getColumn())) {
 			return null;
 		} else {
@@ -116,7 +116,7 @@ public class Board {
 		}
 	}
 
-	public static Space calculateDiagonalSW(Space origin) {
+	public static Space calculateSW(Space origin) {
 		if(isBottomRow(origin.getRow()) || isLeftColumn(origin.getColumn())) {
 			return null;
 		} else {
@@ -175,13 +175,13 @@ public class Board {
 	
 	private static Space calculateDirection(Direction direction, Space next) {
 		if(direction.equals(Direction.NE)) {
-			next = calculateDiagonalNE(next);
+			next = calculateNE(next);
 		} else if(direction.equals(Direction.NW)) {
-			next = calculateDiagonalNW(next);
+			next = calculateNW(next);
 		} else if(direction.equals(Direction.SE)) {
-			next = calculateDiagonalSE(next);
+			next = calculateSE(next);
 		} else if(direction.equals(Direction.SW)) {
-			next = calculateDiagonalSW(next);
+			next = calculateSW(next);
 		} else if(direction.equals(Direction.N)) {
 			next = calculateN(next);
 		} else if(direction.equals(Direction.S)) {
@@ -236,7 +236,7 @@ public class Board {
 			return false;
 		}
 	}
-	// We have to calculate pawn moves differently - we have to calc them for every potential space as well
+
 	public static ArrayList<Space> getAllOpposingTeamsPotentialMoves(Team team) {
 		ArrayList<Space> opposingTeamValidMoves = new ArrayList<>();
 		// TODO - extract opposing team calc to static method

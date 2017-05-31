@@ -37,7 +37,6 @@ public class Pawn extends Piece {
 			hasAlreadyMoved = true;
 		}
 		
-		// Diagonal calculations
 		ArrayList<Space> offensiveMoves = calculateOffensiveMoves(origin);
 		list.addAll(offensiveMoves);
 		
@@ -48,22 +47,22 @@ public class Pawn extends Piece {
 		ArrayList<Space> offensiveMoves = new ArrayList<>();
 		
 		if(this.getTeam() == Team.WHITE) {
-			Space diagonalNE = Board.calculateDiagonalNE(origin);
-			Space diagonalNW = Board.calculateDiagonalNW(origin);
-			if(canPawnMoveOffensively(diagonalNE, this.getTeam())) {
-				offensiveMoves.add(diagonalNE);
+			Space NE = Board.calculateNE(origin);
+			Space NW = Board.calculateNW(origin);
+			if(canPawnMoveOffensively(NE, this.getTeam())) {
+				offensiveMoves.add(NE);
 			}
-			if(canPawnMoveOffensively(diagonalNW, this.getTeam())) {
-				offensiveMoves.add(diagonalNW);
+			if(canPawnMoveOffensively(NW, this.getTeam())) {
+				offensiveMoves.add(NW);
 			}
 		} else {
-			Space diagonalSW = Board.calculateDiagonalSW(origin);
-			Space diagonalSE = Board.calculateDiagonalSE(origin);
-			if(canPawnMoveOffensively(diagonalSW, this.getTeam())) {
-				offensiveMoves.add(diagonalSW);
+			Space SW = Board.calculateSW(origin);
+			Space SE = Board.calculateSE(origin);
+			if(canPawnMoveOffensively(SW, this.getTeam())) {
+				offensiveMoves.add(SW);
 			}
-			if(canPawnMoveOffensively(diagonalSE, this.getTeam())) {
-				offensiveMoves.add(diagonalSE);
+			if(canPawnMoveOffensively(SE, this.getTeam())) {
+				offensiveMoves.add(SE);
 			}
 		}
 		
@@ -74,11 +73,11 @@ public class Pawn extends Piece {
 		ArrayList<Space> threatenedSpaces = new ArrayList<>();
 		
 		if(this.getTeam() == Team.WHITE) {
-			threatenedSpaces.add(Board.calculateDiagonalNE(origin));
-			threatenedSpaces.add(Board.calculateDiagonalNW(origin));
+			threatenedSpaces.add(Board.calculateNE(origin));
+			threatenedSpaces.add(Board.calculateNW(origin));
 		} else {
-			threatenedSpaces.add(Board.calculateDiagonalSW(origin));
-			threatenedSpaces.add(Board.calculateDiagonalSE(origin));
+			threatenedSpaces.add(Board.calculateSW(origin));
+			threatenedSpaces.add(Board.calculateSE(origin));
 		}
 		
 		return threatenedSpaces;
