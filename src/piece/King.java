@@ -16,14 +16,14 @@ public class King extends Piece {
 	public ArrayList<Space> calculateValidMoves(Space origin) {
 		ArrayList<Space> validMoves = new ArrayList<>();
 		
-		validMoves.add(Board.calculateN(origin));
-		validMoves.add(Board.calculateS(origin));
-		validMoves.add(Board.calculateE(origin));
-		validMoves.add(Board.calculateW(origin));
-		validMoves.add(Board.calculateNE(origin));
-		validMoves.add(Board.calculateNW(origin));
-		validMoves.add(Board.calculateSE(origin));
-		validMoves.add(Board.calculateSW(origin));
+		validMoves.add(Direction.calculateN(origin));
+		validMoves.add(Direction.calculateS(origin));
+		validMoves.add(Direction.calculateE(origin));
+		validMoves.add(Direction.calculateW(origin));
+		validMoves.add(Direction.calculateNE(origin));
+		validMoves.add(Direction.calculateNW(origin));
+		validMoves.add(Direction.calculateSE(origin));
+		validMoves.add(Direction.calculateSW(origin));
 		
 		
 		ArrayList<Space> allOpposingTeamMoves = Board.getAllOpposingTeamsPotentialMoves(this.getTeam());

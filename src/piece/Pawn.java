@@ -47,8 +47,8 @@ public class Pawn extends Piece {
 		ArrayList<Space> offensiveMoves = new ArrayList<>();
 		
 		if(this.getTeam() == Team.WHITE) {
-			Space NE = Board.calculateNE(origin);
-			Space NW = Board.calculateNW(origin);
+			Space NE = Direction.calculateNE(origin);
+			Space NW = Direction.calculateNW(origin);
 			if(canPawnMoveOffensively(NE, this.getTeam())) {
 				offensiveMoves.add(NE);
 			}
@@ -56,8 +56,8 @@ public class Pawn extends Piece {
 				offensiveMoves.add(NW);
 			}
 		} else {
-			Space SW = Board.calculateSW(origin);
-			Space SE = Board.calculateSE(origin);
+			Space SW = Direction.calculateSW(origin);
+			Space SE = Direction.calculateSE(origin);
 			if(canPawnMoveOffensively(SW, this.getTeam())) {
 				offensiveMoves.add(SW);
 			}
@@ -73,11 +73,11 @@ public class Pawn extends Piece {
 		ArrayList<Space> threatenedSpaces = new ArrayList<>();
 		
 		if(this.getTeam() == Team.WHITE) {
-			threatenedSpaces.add(Board.calculateNE(origin));
-			threatenedSpaces.add(Board.calculateNW(origin));
+			threatenedSpaces.add(Direction.calculateNE(origin));
+			threatenedSpaces.add(Direction.calculateNW(origin));
 		} else {
-			threatenedSpaces.add(Board.calculateSW(origin));
-			threatenedSpaces.add(Board.calculateSE(origin));
+			threatenedSpaces.add(Direction.calculateSW(origin));
+			threatenedSpaces.add(Direction.calculateSE(origin));
 		}
 		
 		return threatenedSpaces;

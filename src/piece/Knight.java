@@ -22,13 +22,13 @@ public class Knight extends Piece {
 	public ArrayList<Space> calculateValidMoves(Space origin) {
 		ArrayList<Space> validMoves = new ArrayList<>();
 
-		Space n = Board.calculateN(origin);
+		Space n = Direction.calculateN(origin);
 		Space twiceN = null;
 		if(n != null) {
-			twiceN = Board.calculateN(n);
+			twiceN = Direction.calculateN(n);
 			if(twiceN != null) {
-				Space NNE = Board.calculateE(twiceN);
-				Space NNW = Board.calculateW(twiceN);
+				Space NNE = Direction.calculateE(twiceN);
+				Space NNW = Direction.calculateW(twiceN);
 				if(NNE != null || Board.isSpaceOccupiedByEnemy(NNE, this.getTeam())) {
 					validMoves.add(NNE);
 				}
@@ -38,13 +38,13 @@ public class Knight extends Piece {
 			}
 		}
 		
-		Space s = Board.calculateS(origin);
+		Space s = Direction.calculateS(origin);
 		Space twiceS = null;
 		if(s != null) {
-			twiceS = Board.calculateS(s);
+			twiceS = Direction.calculateS(s);
 			if(twiceS != null) {
-				Space SSE = Board.calculateE(twiceS);
-				Space SSW = Board.calculateW(twiceS);
+				Space SSE = Direction.calculateE(twiceS);
+				Space SSW = Direction.calculateW(twiceS);
 				if(SSE != null || Board.isSpaceOccupiedByEnemy(SSE, this.getTeam())) {
 					validMoves.add(SSE);
 				}
@@ -54,13 +54,13 @@ public class Knight extends Piece {
 			}
 		}
 
-		Space e = Board.calculateE(origin);
+		Space e = Direction.calculateE(origin);
 		Space twiceE = null;
 		if(e != null) {
-			twiceE = Board.calculateE(e);
+			twiceE = Direction.calculateE(e);
 			if(twiceE != null) {
-				Space EEN = Board.calculateN(twiceE);
-				Space EES = Board.calculateS(twiceE);
+				Space EEN = Direction.calculateN(twiceE);
+				Space EES = Direction.calculateS(twiceE);
 				if(EEN != null || !Board.isSpaceOccupiedByEnemy(EEN, this.getTeam())) {
 					validMoves.add(EEN);
 				}
@@ -70,13 +70,13 @@ public class Knight extends Piece {
 			}
 		}
 
-		Space w = Board.calculateW(origin);
+		Space w = Direction.calculateW(origin);
 		Space twiceW;
 		if(w != null) {
-			twiceW = Board.calculateW(w);
+			twiceW = Direction.calculateW(w);
 			if(twiceW != null) {
-				Space WWN = Board.calculateN(twiceW);
-				Space WWS = Board.calculateS(twiceW);
+				Space WWN = Direction.calculateN(twiceW);
+				Space WWS = Direction.calculateS(twiceW);
 				if(WWN != null || !Board.isSpaceOccupiedByEnemy(WWN, this.getTeam())) {
 					validMoves.add(WWN);
 				}

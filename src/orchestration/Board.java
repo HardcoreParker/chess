@@ -43,90 +43,6 @@ public class Board {
 		return result.toString();
 	}
 	
-	public static Space calculateN(Space origin) {
-		if(isTopRow(origin.getRow())) {
-			return null;
-		} else {
-			int newRow = origin.getRow() + 1;
-			
-			return calculateSpace(origin.getColumn(), newRow);
-		}
-	}
-
-	public static Space calculateS(Space origin) {
-		if(isBottomRow(origin.getRow())) {
-			return null;
-		} else {
-			int newRow = origin.getRow() - 1;
-			
-			return calculateSpace(origin.getColumn(), newRow);
-		}
-	}
-	
-	public static Space calculateW(Space origin) {
-		if(isLeftColumn(origin.getColumn())) {
-			return null;
-		} else {
-			char newColumn = (char) (origin.getColumn() - 1);
-			
-			return calculateSpace(newColumn, origin.getRow());
-		}
-	}
-
-	public static Space calculateE(Space origin) {
-		if(isRightColumn(origin.getColumn())) {
-			return null;
-		} else {
-			char newColumn = (char) (origin.getColumn() + 1);
-			
-			return calculateSpace(newColumn, origin.getRow());
-		}
-	}
-
-	public static Space calculateNE(Space origin) {
-		if(isTopRow(origin.getRow()) || isRightColumn(origin.getColumn())) {
-			return null;
-		} else {
-			char newColumn = (char) (origin.getColumn() + 1);
-			int newRow = origin.getRow() + 1;
-			
-			return calculateSpace(newColumn, newRow);
-		}
-	}
-
-	public static Space calculateSE(Space origin) {
-		if(isBottomRow(origin.getRow()) || isRightColumn(origin.getColumn())) {
-			return null;
-		} else {
-			char newColumn = (char) (origin.getColumn() + 1);
-			int newRow = origin.getRow() - 1;
-			
-			return calculateSpace(newColumn, newRow);
-		}
-	}
-
-	public static Space calculateNW(Space origin) {
-		if(isTopRow(origin.getRow()) || isLeftColumn(origin.getColumn())) {
-			return null;
-		} else {
-			char newColumn = (char) (origin.getColumn() - 1);
-			int newRow = origin.getRow() + 1;
-			
-			return calculateSpace(newColumn, newRow);
-		}
-	}
-
-	public static Space calculateSW(Space origin) {
-		if(isBottomRow(origin.getRow()) || isLeftColumn(origin.getColumn())) {
-			return null;
-		} else {
-			char newColumn = (char) (origin.getColumn() - 1);
-			int newRow = origin.getRow() - 1;
-			
-			return calculateSpace(newColumn, newRow);
-		}
-	}
-	
 	public static ArrayList<Space> walkBoardUntilNextSpaceUnavailable(Space origin, Direction direction) {
 		ArrayList<Space> list = new ArrayList<Space>();
 		Space next = origin;
@@ -175,41 +91,25 @@ public class Board {
 	
 	private static Space calculateDirection(Direction direction, Space next) {
 		if(direction.equals(Direction.NE)) {
-			next = calculateNE(next);
+			next = Direction.calculateNE(next);
 		} else if(direction.equals(Direction.NW)) {
-			next = calculateNW(next);
+			next = Direction.calculateNW(next);
 		} else if(direction.equals(Direction.SE)) {
-			next = calculateSE(next);
+			next = Direction.calculateSE(next);
 		} else if(direction.equals(Direction.SW)) {
-			next = calculateSW(next);
+			next = Direction.calculateSW(next);
 		} else if(direction.equals(Direction.N)) {
-			next = calculateN(next);
+			next = Direction.calculateN(next);
 		} else if(direction.equals(Direction.S)) {
-			next = calculateS(next);
+			next = Direction.calculateS(next);
 		} else if(direction.equals(Direction.W)) {
-			next = calculateW(next);
+			next = Direction.calculateW(next);
 		} else if(direction.equals(Direction.E)) {
-			next = calculateE(next);
+			next = Direction.calculateE(next);
 		}
 		return next;
 	}
 	
-	private static Space calculateSpace(char column, int row) {
-		return Space.valueOf(Space.class, String.valueOf(column)+String.valueOf(row));
-	}
-	
-	private static boolean isLeftColumn(char column) {
-		return column == 'A';
-	}
-	private static boolean isRightColumn(char column) {
-		return column == 'H';
-	}
-	private static boolean isTopRow(int row) {
-		return row == 8;
-	}
-	private static boolean isBottomRow(int row) {
-		return row == 1;
-	}
 	private String getBoardDivider() {
 		return BOARD_COLOR + "|";
 	}
