@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import exception.NoKingFoundException;
 import piece.King;
+import piece.Pawn;
 import piece.Piece;
 
 public class Board {
@@ -227,7 +228,7 @@ public class Board {
 
 	public static boolean isTeamInCheck(Team team) throws NoKingFoundException {
 		Space kingSpace = findKing(team);
-		ArrayList<Space> opposingTeamValidMoves = getAllOpposingTeamMoves(team);
+		ArrayList<Space> opposingTeamValidMoves = getAllOpposingTeamsPotentialMoves(team);
 		
 		if(opposingTeamValidMoves.contains(kingSpace)) {
 			return true;
@@ -235,9 +236,10 @@ public class Board {
 			return false;
 		}
 	}
-	
-	public static ArrayList<Space> getAllOpposingTeamMoves(Team team) {
+	// We have to calculate pawn moves differently - we have to calc them for every potential space as well
+	public static ArrayList<Space> getAllOpposingTeamsPotentialMoves(Team team) {
 		ArrayList<Space> opposingTeamValidMoves = new ArrayList<>();
+		// TODO - extract opposing team calc to static method
 		Team opposingTeam = null;
 		if(team.equals(Team.WHITE)) {
 			opposingTeam = Team.BLACK;
@@ -246,8 +248,13 @@ public class Board {
 		}
 
 		for(Space space : board.keySet()) {
-			if(board.get(space) != null && board.get(space).getTeam().equals(opposingTeam)) {
-				opposingTeamValidMoves.addAll(board.get(space).calculateValidMoves(space));
+			Piece piece = board.get(space);
+			if(piece != null && piece.getTeam().equals(opposingTeam)) {
+				if(piece.getClass() == Pawn.class) { // Since we're only using this to calculate check and checkmates, we only calculate a pawn's offensive moves
+					opposingTeamValidMoves.addAll(((Pawn) piece).calculateSpacesPawnCanThreaten(space));
+				} else {
+					opposingTeamValidMoves.addAll(piece.calculateValidMoves(space));
+				}
 			}
 		}
 		

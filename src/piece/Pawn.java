@@ -38,29 +38,53 @@ public class Pawn extends Piece {
 		}
 		
 		// Diagonal calculations
+		ArrayList<Space> offensiveMoves = calculateOffensiveMoves(origin);
+		list.addAll(offensiveMoves);
+		
+		return list;
+	}
+	
+	private ArrayList<Space> calculateOffensiveMoves(Space origin) {
+		ArrayList<Space> offensiveMoves = new ArrayList<>();
+		
 		if(this.getTeam() == Team.WHITE) {
 			Space diagonalNE = Board.calculateDiagonalNE(origin);
 			Space diagonalNW = Board.calculateDiagonalNW(origin);
-			if(canPawnMoveDiagonally(diagonalNE, this.getTeam())) {
-				list.add(diagonalNE);
+			if(canPawnMoveOffensively(diagonalNE, this.getTeam())) {
+				offensiveMoves.add(diagonalNE);
 			}
-			if(canPawnMoveDiagonally(diagonalNW, this.getTeam())) {
-				list.add(diagonalNW);
+			if(canPawnMoveOffensively(diagonalNW, this.getTeam())) {
+				offensiveMoves.add(diagonalNW);
 			}
 		} else {
 			Space diagonalSW = Board.calculateDiagonalSW(origin);
-			Space diagonalSE = Board.calculateDiagonalSW(origin);
-			if(canPawnMoveDiagonally(diagonalSW, this.getTeam())) {
-				list.add(diagonalSW);
+			Space diagonalSE = Board.calculateDiagonalSE(origin);
+			if(canPawnMoveOffensively(diagonalSW, this.getTeam())) {
+				offensiveMoves.add(diagonalSW);
 			}
-			if(canPawnMoveDiagonally(diagonalSE, this.getTeam())) {
-				list.add(diagonalSE);
+			if(canPawnMoveOffensively(diagonalSE, this.getTeam())) {
+				offensiveMoves.add(diagonalSE);
 			}
 		}
-		return list;
+		
+		return offensiveMoves;
+	}
+	
+	public ArrayList<Space> calculateSpacesPawnCanThreaten(Space origin) {
+		ArrayList<Space> threatenedSpaces = new ArrayList<>();
+		
+		if(this.getTeam() == Team.WHITE) {
+			threatenedSpaces.add(Board.calculateDiagonalNE(origin));
+			threatenedSpaces.add(Board.calculateDiagonalNW(origin));
+		} else {
+			threatenedSpaces.add(Board.calculateDiagonalSW(origin));
+			threatenedSpaces.add(Board.calculateDiagonalSE(origin));
+		}
+		
+		return threatenedSpaces;
 	}
 
-	private boolean canPawnMoveDiagonally(Space space, Team team) {
+	private boolean canPawnMoveOffensively(Space space, Team team) {
 		return space != null && 
 				!Board.isSpaceEmpty(space) && 
 				Board.isSpaceOccupiedByEnemy(space, team);

@@ -16,7 +16,6 @@ public class King extends Piece {
 	public ArrayList<Space> calculateValidMoves(Space origin) {
 		ArrayList<Space> validMoves = new ArrayList<>();
 		
-		// TODO - WIP Pickup
 		validMoves.add(Board.calculateN(origin));
 		validMoves.add(Board.calculateS(origin));
 		validMoves.add(Board.calculateE(origin));
@@ -27,13 +26,16 @@ public class King extends Piece {
 		validMoves.add(Board.calculateDiagonalSW(origin));
 		
 		
-		ArrayList<Space> allOpposingTeamMoves = Board.getAllOpposingTeamMoves(this.getTeam());
+		ArrayList<Space> allOpposingTeamMoves = Board.getAllOpposingTeamsPotentialMoves(this.getTeam());
 		
+		
+		ArrayList<Space> invalidMoves = new ArrayList<>();
 		for(Space space : validMoves) {
 			if(allOpposingTeamMoves.contains(space)) {
-				validMoves.remove(space);
+				invalidMoves.add(space);
 			}
 		}
+		validMoves.removeAll(invalidMoves);
 		
 		return validMoves;
 	}
