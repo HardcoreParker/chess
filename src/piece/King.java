@@ -33,6 +33,8 @@ public class King extends Piece {
 		for(Space space : validMoves) {
 			if(allOpposingTeamMoves.contains(space)) {
 				invalidMoves.add(space);
+			} else if(!Board.isSpaceEmpty(space)) {
+				invalidMoves.add(space);
 			}
 		}
 		validMoves.removeAll(invalidMoves);

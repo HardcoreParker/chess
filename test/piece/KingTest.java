@@ -43,6 +43,7 @@ public class KingTest {
 	
 	@Test
 	public void king_can_take_enemies_in_every_direction_test() {
+		// Rotates putting 3 pawns above, right, bottom, then left of a king
 		board.put(Space.D5, new Pawn(Team.BLACK));
 		board.put(Space.C5, new Pawn(Team.BLACK));
 		board.put(Space.E5, new Pawn(Team.BLACK));
@@ -59,30 +60,79 @@ public class KingTest {
 		assert(validMoves.contains(Space.E3));
 		assert(validMoves.contains(Space.C3));
 		
-		//board = getEmptyBoard();
+		board = getEmptyBoard();
+		board.put(origin, new King(Team.WHITE));
+		testKing = (King) board.get(origin);
+		
+		board.put(Space.E5, new Pawn(Team.BLACK));
+		board.put(Space.E4, new Pawn(Team.BLACK));
+		board.put(Space.E3, new Pawn(Team.BLACK));
+		
+		validMoves = testKing.calculateValidMoves(origin);
+		assert(validMoves.size() == 7);
+		
+		assert(validMoves.contains(Space.D5));
+		assert(validMoves.contains(Space.C4));
+		assert(validMoves.contains(Space.E4));
+		assert(validMoves.contains(Space.C5));
+		assert(validMoves.contains(Space.E5));
+		assert(validMoves.contains(Space.E3));
+		assert(validMoves.contains(Space.C3));
 		
 		
+		board = getEmptyBoard();
+		board.put(origin, new King(Team.WHITE));
+		testKing = (King) board.get(origin);
 		
-//		board.put(Space.D3, new Pawn(Team.BLACK));
-//		board.put(Space.C4, new Pawn(Team.BLACK));
-//		board.put(Space.E4, new Pawn(Team.BLACK));
-//		board.put(Space.C5, new Pawn(Team.BLACK));
-//		board.put(Space.E5, new Pawn(Team.BLACK));
-//		board.put(Space.E3, new Pawn(Team.BLACK));
-//		board.put(Space.C3, new Pawn(Team.BLACK));
-//		
-//		ArrayList<Space> validMoves = testKing.calculateValidMoves(origin);
-//		
-//		assert(validMoves.size() == 8);
-//		
-//		assert(validMoves.contains(Space.D5));
-//		assert(validMoves.contains(Space.D3));
-//		assert(validMoves.contains(Space.C4));
-//		assert(validMoves.contains(Space.E4));
-//		assert(validMoves.contains(Space.C5));
-//		assert(validMoves.contains(Space.E5));
-//		assert(validMoves.contains(Space.E3));
-//		assert(validMoves.contains(Space.C3));
+		board.put(Space.C3, new Pawn(Team.BLACK));
+		board.put(Space.D3, new Pawn(Team.BLACK));
+		board.put(Space.E3, new Pawn(Team.BLACK));
+		
+		validMoves = testKing.calculateValidMoves(origin);
+		assert(validMoves.size() == 8);
+		
+		assert(validMoves.contains(Space.D5));
+		assert(validMoves.contains(Space.D3));
+		assert(validMoves.contains(Space.C4));
+		assert(validMoves.contains(Space.E4));
+		assert(validMoves.contains(Space.C5));
+		assert(validMoves.contains(Space.E5));
+		assert(validMoves.contains(Space.E3));
+		assert(validMoves.contains(Space.C3));
+		
+		board = getEmptyBoard();
+		board.put(origin, new King(Team.WHITE));
+		testKing = (King) board.get(origin);
+		
+		board.put(Space.C5, new Pawn(Team.BLACK));
+		board.put(Space.C4, new Pawn(Team.BLACK));
+		board.put(Space.C4, new Pawn(Team.BLACK));
+		
+		validMoves = testKing.calculateValidMoves(origin);
+		assert(validMoves.size() == 7);
+		
+		assert(validMoves.contains(Space.D5));
+		assert(validMoves.contains(Space.C4));
+		assert(validMoves.contains(Space.E4));
+		assert(validMoves.contains(Space.C5));
+		assert(validMoves.contains(Space.E5));
+		assert(validMoves.contains(Space.E3));
+		assert(validMoves.contains(Space.C3));
+	}
+	
+	@Test
+	public void king_cant_move_through_teammates_test() {
+		board.put(Space.D5, new Pawn(Team.WHITE));
+		board.put(Space.D3, new Pawn(Team.WHITE));
+		board.put(Space.C4, new Pawn(Team.WHITE));
+		board.put(Space.E4, new Pawn(Team.WHITE));
+		board.put(Space.C5, new Pawn(Team.WHITE));
+		board.put(Space.E5, new Pawn(Team.WHITE));
+		board.put(Space.E3, new Pawn(Team.WHITE));
+		board.put(Space.C3, new Pawn(Team.WHITE));
+		
+		ArrayList<Space> validMoves = testKing.calculateValidMoves(origin);
+		assert(validMoves.size() == 0);
 	}
 
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {
