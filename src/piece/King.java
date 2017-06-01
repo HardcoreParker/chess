@@ -6,7 +6,7 @@ import orchestration.Direction;
 import orchestration.Space;
 import orchestration.Team;
 
-public class King extends Piece {
+public class King extends Piece implements ThreatenSeparateFromMove {
 
 	public King(Team team) {
 		super(team);
@@ -26,7 +26,7 @@ public class King extends Piece {
 		validMoves.add(Direction.calculateSW(origin));
 		
 		
-		ArrayList<Space> allOpposingTeamMoves = Board.getAllOpposingTeamsThreats(this.getTeam());
+		ArrayList<Space> allOpposingTeamMoves = Board.getAllThreatenedSpacesFromTeam(Team.getOpposingTeam(this.getTeam()));
 		
 		
 		ArrayList<Space> invalidMoves = new ArrayList<>();
@@ -42,7 +42,13 @@ public class King extends Piece {
 		return validMoves;
 	}
 	
-	public ArrayList<Space> calculateSpacesKingCanThreaten(Space origin) {
+	@Override
+	public char getShortName() {
+		return 'K';
+	}
+
+	@Override
+	public ArrayList<Space> calculateSpacesPieceCanThreaten(Space origin) {
 		ArrayList<Space> validMoves = new ArrayList<>();
 		
 		validMoves.add(Direction.calculateN(origin));
@@ -55,11 +61,6 @@ public class King extends Piece {
 		validMoves.add(Direction.calculateSW(origin));
 		
 		return validMoves;
-	}
-
-	@Override
-	public char getShortName() {
-		return 'K';
 	}
 
 }

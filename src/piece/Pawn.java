@@ -7,7 +7,7 @@ import orchestration.Direction;
 import orchestration.Space;
 import orchestration.Team;
 
-public class Pawn extends Piece {
+public class Pawn extends Piece implements ThreatenSeparateFromMove {
 
 	private boolean hasMoved = false;
 	
@@ -69,7 +69,19 @@ public class Pawn extends Piece {
 		return offensiveMoves;
 	}
 	
-	public ArrayList<Space> calculateSpacesPawnCanThreaten(Space origin) {
+	private boolean canPawnMoveOffensively(Space space, Team team) {
+		return space != null && 
+				!Board.isSpaceEmpty(space) && 
+				Board.isSpaceOccupiedByEnemy(space, team);
+	}
+
+	@Override
+	public char getShortName() {
+		return 'P';
+	}
+
+	@Override
+	public ArrayList<Space> calculateSpacesPieceCanThreaten(Space origin) {
 		ArrayList<Space> threatenedSpaces = new ArrayList<>();
 		
 		if(this.getTeam() == Team.WHITE) {
@@ -81,16 +93,5 @@ public class Pawn extends Piece {
 		}
 		
 		return threatenedSpaces;
-	}
-
-	private boolean canPawnMoveOffensively(Space space, Team team) {
-		return space != null && 
-				!Board.isSpaceEmpty(space) && 
-				Board.isSpaceOccupiedByEnemy(space, team);
-	}
-
-	@Override
-	public char getShortName() {
-		return 'P';
 	}
 }

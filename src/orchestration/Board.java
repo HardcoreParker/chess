@@ -128,7 +128,7 @@ public class Board {
 
 	public static boolean isTeamInCheck(Team team) throws NoKingFoundException {
 		Space kingSpace = findKing(team);
-		ArrayList<Space> opposingTeamThreats = getAllOpposingTeamsThreats(team);
+		ArrayList<Space> opposingTeamThreats = getAllThreatenedSpacesFromTeam(Team.getOpposingTeam(team));
 		
 		if(opposingTeamThreats.contains(kingSpace)) {
 			return true;
@@ -137,25 +137,23 @@ public class Board {
 		}
 	}
 
-	public static ArrayList<Space> getAllOpposingTeamsThreats(Team team) {
-		ArrayList<Space> opposingTeamThreats = new ArrayList<>();
+	public static ArrayList<Space> getAllThreatenedSpacesFromTeam(Team team) {
+		ArrayList<Space> threatenedSpaces = new ArrayList<>();
 
 		for(Space space : board.keySet()) {
 			Piece piece = board.get(space);
-			System.out.println(space);
-			System.out.println(piece);
-			if(piece != null && piece.getTeam().equals(Team.getOpposingTeam(team))) {
+			if(piece != null && piece.getTeam().equals(team)) {
 				if(piece.getClass() == Pawn.class) { // Since we're only using this to calculate check and checkmates, we only calculate a pawn's offensive moves
-					opposingTeamThreats.addAll(((Pawn) piece).calculateSpacesPawnCanThreaten(space));
+					threatenedSpaces.addAll(((Pawn) piece).calculateSpacesPieceCanThreaten(space));
 				} else if(piece.getClass() == King.class) {
-					opposingTeamThreats.addAll(((King) piece).calculateSpacesKingCanThreaten(space));
+					threatenedSpaces.addAll(((King) piece).calculateSpacesPieceCanThreaten(space));
 				} else {
-					opposingTeamThreats.addAll(piece.calculateValidMoves(space));
+					threatenedSpaces.addAll(piece.calculateValidMoves(space));
 				}
 			}
 		}
 		
-		return opposingTeamThreats;
+		return threatenedSpaces;
 	}
 	
 	public static boolean isTeamInCheckmate(Team team) {

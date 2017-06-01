@@ -122,6 +122,8 @@ public class PawnTest {
 		assert(validMoves.size() == 0);
 	}
 	
+	// TODO - Test calculateSpacesPieceCanThreaten
+	
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {
 		Board board = new Board();
 		LinkedHashMap<Space, Piece> boardMap = board.getBoard();

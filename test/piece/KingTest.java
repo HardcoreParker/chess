@@ -147,8 +147,8 @@ public class KingTest {
 		testKingWhite = (King) board.get(originWhite);
 		testKingBlack = (King) board.get(originBlack);
 		
-		ArrayList<Space> spacesWhiteKingCanThreaten = testKingWhite.calculateSpacesKingCanThreaten(originWhite);
-		ArrayList<Space> spacesBlackKingCanThreaten = testKingBlack.calculateSpacesKingCanThreaten(originBlack);
+		ArrayList<Space> spacesWhiteKingCanThreaten = testKingWhite.calculateSpacesPieceCanThreaten(originWhite);
+		ArrayList<Space> spacesBlackKingCanThreaten = testKingBlack.calculateSpacesPieceCanThreaten(originBlack);
 		
 		assert(spacesWhiteKingCanThreaten.size() == 8);
 		
