@@ -122,6 +122,29 @@ public class PawnTest {
 		assert(validMoves.size() == 0);
 	}
 	
+	@Test
+	public void pawn_movement_check_from_corner() {
+		board = getEmptyBoard();
+		origin = Space.A2;
+		board.put(origin, new Pawn(Team.WHITE));
+		
+		ArrayList<Space> validMoves = testPawn.calculateValidMoves(origin);
+		assert(validMoves.size() == 2);
+		assert(validMoves.contains(Space.A3));
+		assert(validMoves.contains(Space.A4));
+	}
+	
+	@Test
+	public void pawn_threat_check_from_corner() {
+		board = getEmptyBoard();
+		origin = Space.A2;
+		board.put(origin, new Pawn(Team.WHITE));
+		
+		ArrayList<Space> validMoves = testPawn.calculateSpacesPieceCanThreaten(origin);
+		assert(validMoves.size() == 1);
+		assert(validMoves.contains(Space.B3));
+	}
+	
 	// TODO - Test calculateSpacesPieceCanThreaten
 	
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {

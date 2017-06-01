@@ -5,11 +5,11 @@ import java.util.LinkedHashMap;
 import org.junit.Before;
 import org.junit.Test;
 
-import piece.King;
+import piece.Pawn;
 import piece.Piece;
 
 public class BoardTest {
-
+ 
 	LinkedHashMap<Space, Piece> board;
 	
 	@Before
@@ -19,8 +19,15 @@ public class BoardTest {
 	}
 	
 	@Test
-	public void getAllOpposingTeamsThreats_test() {
-		// TODO - Stub
+	public void getAllThreatenedSpacesFromTeam_test() {
+		board.put(Space.A1, new Pawn(Team.BLACK));
+		
+		ArrayList<Space> allThreatenedSpacesFromTeam = Board.getAllThreatenedSpacesFromTeam(Team.BLACK, board);
+		
+		assert(allThreatenedSpacesFromTeam.size() == 0);
+		
+		assert(allThreatenedSpacesFromTeam.contains(Space.A1));
+		
 	}
 	
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {

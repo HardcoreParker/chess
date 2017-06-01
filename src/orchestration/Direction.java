@@ -1,5 +1,7 @@
 package orchestration;
 
+import exception.SpaceOutOfBoundsException;
+
 public enum Direction {
 	N(),
 	S(),

@@ -43,19 +43,6 @@ public class Game {
 		
 	}
 	
-	private static boolean processMove(Space origin, Space destination, Team playerTeam) {
-		LinkedHashMap<Space, Piece> liveBoard = board.getBoard();
-		
-		Piece pieceToMove = liveBoard.get(origin);
-		
-		if(pieceToMove.calculateValidMoves(origin).contains(destination)) {
-			liveBoard.put(origin, null);
-			liveBoard.put(destination, pieceToMove);
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
 	/* 
 	 * First, the game initializes and gives the WHITE player the opportunity to make a move

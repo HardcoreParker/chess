@@ -19,7 +19,7 @@ public class Board {
 	}
 	
 	// Singleton?
-	public LinkedHashMap<Space, Piece> getBoard() {
+	public static LinkedHashMap<Space, Piece> getBoard() {
 		return board;
 	}
 	
@@ -56,8 +56,7 @@ public class Board {
 						isSpaceOccupiedByEnemy(next, board.get(origin).getTeam())) {
 				list.add(next); // The space can be taken
 				break; // Stop walking the board in that direction
-			}
-				else {
+			} else {
 				next = null; // Space was occupied by friendly, nulling out next will fail the conditional
 			}
 		}
@@ -74,6 +73,10 @@ public class Board {
 			if(isSpaceEmpty(next)) {
 				list.add(next);
 				times--;
+			} else if (!isSpaceEmpty(next) && 
+					isSpaceOccupiedByEnemy(next, board.get(origin).getTeam())) { // TODO - Improve elegance of this 'special condition' of Pawn check
+				list.add(next);
+				break;
 			} else {
 				next = null;
 			}
@@ -81,7 +84,7 @@ public class Board {
 		return list;
 	}
 	
-	public static boolean isSpaceEmpty(Space space) {
+	public static boolean isSpaceEmpty(Space space) { // TODO - Fix bug where null represents not only the outside of the board, but also an empty space
 		return board.get(space) == null;
 	}
 	
@@ -128,7 +131,7 @@ public class Board {
 
 	public static boolean isTeamInCheck(Team team) throws NoKingFoundException {
 		Space kingSpace = findKing(team);
-		ArrayList<Space> opposingTeamThreats = getAllThreatenedSpacesFromTeam(Team.getOpposingTeam(team));
+		ArrayList<Space> opposingTeamThreats = getAllThreatenedSpacesFromTeam(Team.getOpposingTeam(team), board); // actual board in this test
 		
 		if(opposingTeamThreats.contains(kingSpace)) {
 			return true;
@@ -137,16 +140,14 @@ public class Board {
 		}
 	}
 
-	public static ArrayList<Space> getAllThreatenedSpacesFromTeam(Team team) {
+	public static ArrayList<Space> getAllThreatenedSpacesFromTeam(Team team, LinkedHashMap<Space, Piece> theoreticalBoard) {
 		ArrayList<Space> threatenedSpaces = new ArrayList<>();
 
-		for(Space space : board.keySet()) {
-			Piece piece = board.get(space);
+		for(Space space : theoreticalBoard.keySet()) {
+			Piece piece = theoreticalBoard.get(space);
 			if(piece != null && piece.getTeam().equals(team)) {
-				if(piece.getClass() == Pawn.class) { // Since we're only using this to calculate check and checkmates, we only calculate a pawn's offensive moves
-					threatenedSpaces.addAll(((Pawn) piece).calculateSpacesPieceCanThreaten(space));
-				} else if(piece.getClass() == King.class) {
-					threatenedSpaces.addAll(((King) piece).calculateSpacesPieceCanThreaten(space));
+				if(piece.getClass() == King.class) {
+					threatenedSpaces.addAll(((King) piece).calculateSpacesKingCanThreaten(space));
 				} else {
 					threatenedSpaces.addAll(piece.calculateValidMoves(space));
 				}
@@ -160,5 +161,17 @@ public class Board {
 		// TODO - Implement checkmate
 		
 		return false;
+	}
+
+	public static boolean processMove(Space origin, Space destination, Team playerTeam) {		
+		Piece pieceToMove = Board.getBoard().get(origin);
+		
+		if(pieceToMove.calculateValidMoves(origin).contains(destination)) {
+			Board.getBoard().put(origin, null);
+			Board.getBoard().put(destination, pieceToMove);
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

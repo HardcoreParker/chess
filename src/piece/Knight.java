@@ -22,6 +22,7 @@ public class Knight extends Piece {
 	public ArrayList<Space> calculateValidMoves(Space origin) {
 		ArrayList<Space> validMoves = new ArrayList<>();
 
+		// Shouldn't use Direction.calculate unless we're null checking - which we do here
 		Space n = Direction.calculateN(origin);
 		Space twiceN = null;
 		if(n != null) {

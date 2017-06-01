@@ -7,7 +7,7 @@ import orchestration.Direction;
 import orchestration.Space;
 import orchestration.Team;
 
-public class Pawn extends Piece implements ThreatenSeparateFromMove {
+public class Pawn extends Piece {
 
 	private boolean hasMoved = false;
 	
@@ -68,7 +68,8 @@ public class Pawn extends Piece implements ThreatenSeparateFromMove {
 		
 		return offensiveMoves;
 	}
-	
+	// PARKER - I should move the king first and then check that version of the board to see if the king's new position is within the opposing team's potential moves
+	// How does this effect calculating check? It doesn't.
 	private boolean canPawnMoveOffensively(Space space, Team team) {
 		return space != null && 
 				!Board.isSpaceEmpty(space) && 
@@ -78,20 +79,5 @@ public class Pawn extends Piece implements ThreatenSeparateFromMove {
 	@Override
 	public char getShortName() {
 		return 'P';
-	}
-
-	@Override
-	public ArrayList<Space> calculateSpacesPieceCanThreaten(Space origin) {
-		ArrayList<Space> threatenedSpaces = new ArrayList<>();
-		
-		if(this.getTeam() == Team.WHITE) {
-			threatenedSpaces.add(Direction.calculateNE(origin));
-			threatenedSpaces.add(Direction.calculateNW(origin));
-		} else {
-			threatenedSpaces.add(Direction.calculateSW(origin));
-			threatenedSpaces.add(Direction.calculateSE(origin));
-		}
-		
-		return threatenedSpaces;
 	}
 }
