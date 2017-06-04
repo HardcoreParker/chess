@@ -48,7 +48,7 @@ public class Board {
 		Space next = origin;
 		while(next != null) {
 			
-			next = calculateDirection(direction, next);
+			next = Direction.calculateDirection(direction, next);
 			
 			if(isSpaceEmpty(next) && next != null) {
 				list.add(next);
@@ -69,7 +69,7 @@ public class Board {
 		Space next = origin;
 		while(next != null && times > 0) {
 			
-			next = calculateDirection(direction, next);
+			next = Direction.calculateDirection(direction, next);
 			
 			if(isSpaceEmpty(next)) {
 				list.add(next);
@@ -87,27 +87,6 @@ public class Board {
 	
 	public static boolean isSpaceOccupiedByEnemy(Space space, Team team) {
 		return !isSpaceEmpty(space) && board.get(space).getTeam() != team;
-	}
-	
-	private static Space calculateDirection(Direction direction, Space next) {
-		if(direction.equals(Direction.NE)) {
-			next = Direction.calculateNE(next);
-		} else if(direction.equals(Direction.NW)) {
-			next = Direction.calculateNW(next);
-		} else if(direction.equals(Direction.SE)) {
-			next = Direction.calculateSE(next);
-		} else if(direction.equals(Direction.SW)) {
-			next = Direction.calculateSW(next);
-		} else if(direction.equals(Direction.N)) {
-			next = Direction.calculateN(next);
-		} else if(direction.equals(Direction.S)) {
-			next = Direction.calculateS(next);
-		} else if(direction.equals(Direction.W)) {
-			next = Direction.calculateW(next);
-		} else if(direction.equals(Direction.E)) {
-			next = Direction.calculateE(next);
-		}
-		return next;
 	}
 	
 	private String getBoardDivider() {

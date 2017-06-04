@@ -47,8 +47,8 @@ public class Pawn extends Piece implements ThreatenSeparateFromMove {
 		ArrayList<Space> offensiveMoves = new ArrayList<>();
 		
 		if(this.getTeam() == Team.WHITE) {
-			Space NE = Direction.calculateNE(origin);
-			Space NW = Direction.calculateNW(origin);
+			Space NE = Direction.calculateDirection(Direction.NE, origin);
+			Space NW = Direction.calculateDirection(Direction.NW, origin);
 			if(canPawnMoveOffensively(NE, this.getTeam())) {
 				offensiveMoves.add(NE);
 			}
@@ -56,8 +56,8 @@ public class Pawn extends Piece implements ThreatenSeparateFromMove {
 				offensiveMoves.add(NW);
 			}
 		} else {
-			Space SW = Direction.calculateSW(origin);
-			Space SE = Direction.calculateSE(origin);
+			Space SW = Direction.calculateDirection(Direction.SW, origin);
+			Space SE = Direction.calculateDirection(Direction.SE, origin);
 			if(canPawnMoveOffensively(SW, this.getTeam())) {
 				offensiveMoves.add(SW);
 			}
@@ -69,6 +69,7 @@ public class Pawn extends Piece implements ThreatenSeparateFromMove {
 		return offensiveMoves;
 	}
 	
+	// TODO - empty check is already done downstream in isSpaceOccupiedByEnemy, no need for isSpaceEmpty check
 	private boolean canPawnMoveOffensively(Space space, Team team) {
 		return space != null && 
 				!Board.isSpaceEmpty(space) && 
@@ -85,22 +86,22 @@ public class Pawn extends Piece implements ThreatenSeparateFromMove {
 		ArrayList<Space> threatenedSpaces = new ArrayList<>();
 		
 		if(this.getTeam() == Team.WHITE) {
-			Space NE = Direction.calculateNE(origin);
+			Space NE = Direction.calculateDirection(Direction.NE, origin);
 			if(NE != null) {
 				threatenedSpaces.add(NE);
 			}
 			
-			Space NW = Direction.calculateNW(origin);
+			Space NW = Direction.calculateDirection(Direction.NW, origin);
 			if(NW != null) {
 				threatenedSpaces.add(NW);
 			}
 		} else {
-			Space SE = Direction.calculateSE(origin);
+			Space SE = Direction.calculateDirection(Direction.SE, origin);
 			if(SE != null) {
 				threatenedSpaces.add(SE);
 			}
 			
-			Space SW = Direction.calculateSW(origin);
+			Space SW = Direction.calculateDirection(Direction.SW, origin);
 			if(SW != null) {
 				threatenedSpaces.add(SW);
 			}

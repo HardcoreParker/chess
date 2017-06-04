@@ -10,7 +10,34 @@ public enum Direction {
 	SW(),
 	SE();
 	
-	public static Space calculateN(Space origin) {
+	/* 
+	 * All of these 'calculateDirection' methods do not handle out of bounds (OOB) OR occupied spaces on their own and only need to be used in threat calculation and 
+	 * cases like Knight movement where the piece does not need to walk a cleared 'path' to perform calculations. All OOB and OccupiedSpace checks need to be performed manually
+	 * In cases where these methods are used, otherwise use "Board.walkBoardUntilNextSpaceUnavailable" for safe calculations
+	 */
+	
+	public static Space calculateDirection(Direction direction, Space origin) {
+		if(direction.equals(Direction.NE)) {
+			origin = Direction.calculateNE(origin);
+		} else if(direction.equals(Direction.NW)) {
+			origin = Direction.calculateNW(origin);
+		} else if(direction.equals(Direction.SE)) {
+			origin = Direction.calculateSE(origin);
+		} else if(direction.equals(Direction.SW)) {
+			origin = Direction.calculateSW(origin);
+		} else if(direction.equals(Direction.N)) {
+			origin = Direction.calculateN(origin);
+		} else if(direction.equals(Direction.S)) {
+			origin = Direction.calculateS(origin);
+		} else if(direction.equals(Direction.W)) {
+			origin = Direction.calculateW(origin);
+		} else if(direction.equals(Direction.E)) {
+			origin = Direction.calculateE(origin);
+		}
+		return origin;
+	}
+	
+	private static Space calculateN(Space origin) {
 		if(isTopRow(origin.getRow())) {
 			return null;
 		} else {
@@ -20,7 +47,7 @@ public enum Direction {
 		}
 	}
 
-	public static Space calculateS(Space origin) {
+	private static Space calculateS(Space origin) {
 		if(isBottomRow(origin.getRow())) {
 			return null;
 		} else {
@@ -30,7 +57,7 @@ public enum Direction {
 		}
 	}
 	
-	public static Space calculateW(Space origin) {
+	private static Space calculateW(Space origin) {
 		if(isLeftColumn(origin.getColumn())) {
 			return null;
 		} else {
@@ -40,7 +67,7 @@ public enum Direction {
 		}
 	}
 
-	public static Space calculateE(Space origin) {
+	private static Space calculateE(Space origin) {
 		if(isRightColumn(origin.getColumn())) {
 			return null;
 		} else {
@@ -50,7 +77,7 @@ public enum Direction {
 		}
 	}
 
-	public static Space calculateNE(Space origin) {
+	private static Space calculateNE(Space origin) {
 		if(isTopRow(origin.getRow()) || isRightColumn(origin.getColumn())) {
 			return null;
 		} else {
@@ -61,7 +88,7 @@ public enum Direction {
 		}
 	}
 
-	public static Space calculateSE(Space origin) {
+	private static Space calculateSE(Space origin) {
 		if(isBottomRow(origin.getRow()) || isRightColumn(origin.getColumn())) {
 			return null;
 		} else {
@@ -72,7 +99,7 @@ public enum Direction {
 		}
 	}
 
-	public static Space calculateNW(Space origin) {
+	private static Space calculateNW(Space origin) {
 		if(isTopRow(origin.getRow()) || isLeftColumn(origin.getColumn())) {
 			return null;
 		} else {
@@ -83,7 +110,7 @@ public enum Direction {
 		}
 	}
 
-	public static Space calculateSW(Space origin) {
+	private static Space calculateSW(Space origin) {
 		if(isBottomRow(origin.getRow()) || isLeftColumn(origin.getColumn())) {
 			return null;
 		} else {

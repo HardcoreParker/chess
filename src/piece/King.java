@@ -14,17 +14,24 @@ public class King extends Piece implements ThreatenSeparateFromMove {
 
 	@Override
 	public ArrayList<Space> calculateValidMoves(Space origin) {
+		ArrayList<Space> potentialMoves = new ArrayList<>();
+		
+		potentialMoves.add(Direction.calculateDirection(Direction.N, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.S, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.E, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.W, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.NE, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.NW, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.SW, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.SE, origin));
+		
 		ArrayList<Space> validMoves = new ArrayList<>();
 		
-		validMoves.add(Direction.calculateN(origin));
-		validMoves.add(Direction.calculateS(origin));
-		validMoves.add(Direction.calculateE(origin));
-		validMoves.add(Direction.calculateW(origin));
-		validMoves.add(Direction.calculateNE(origin));
-		validMoves.add(Direction.calculateNW(origin));
-		validMoves.add(Direction.calculateSE(origin));
-		validMoves.add(Direction.calculateSW(origin));
-		
+		for(Space space : potentialMoves) {
+			if(space != null) {
+				validMoves.add(space);
+			}
+		}
 		
 		ArrayList<Space> allOpposingTeamMoves = Board.getAllThreatenedSpacesFromTeam(Team.getOpposingTeam(this.getTeam()));
 		
@@ -49,16 +56,25 @@ public class King extends Piece implements ThreatenSeparateFromMove {
 
 	@Override
 	public ArrayList<Space> calculateSpacesPieceCanThreaten(Space origin) {
+		ArrayList<Space> potentialMoves = new ArrayList<>();
+		
+		potentialMoves.add(Direction.calculateDirection(Direction.N, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.S, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.E, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.W, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.NE, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.NW, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.SW, origin));
+		potentialMoves.add(Direction.calculateDirection(Direction.SE, origin));
+		
+		// Handle null spaces occurring from calculateDirection() not being boundary safe
 		ArrayList<Space> validMoves = new ArrayList<>();
 		
-		validMoves.add(Direction.calculateN(origin));
-		validMoves.add(Direction.calculateS(origin));
-		validMoves.add(Direction.calculateE(origin));
-		validMoves.add(Direction.calculateW(origin));
-		validMoves.add(Direction.calculateNE(origin));
-		validMoves.add(Direction.calculateNW(origin));
-		validMoves.add(Direction.calculateSE(origin));
-		validMoves.add(Direction.calculateSW(origin));
+		for(Space move : potentialMoves) {
+			if(move != null) {
+				validMoves.add(move);
+			}
+		}
 		
 		return validMoves;
 	}
