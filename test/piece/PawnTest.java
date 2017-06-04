@@ -122,7 +122,30 @@ public class PawnTest {
 		assert(validMoves.size() == 0);
 	}
 	
-	// TODO - Test calculateSpacesPieceCanThreaten
+	@Test
+	public void pawn_calculate_spaces_piece_can_threaten() {
+		board = getEmptyBoard();
+		origin = Space.A7;
+		board.put(origin, new Pawn(Team.WHITE));
+		
+		testPawn = (Pawn) board.get(origin);
+		ArrayList<Space> threats = testPawn.calculateSpacesPieceCanThreaten(origin);
+		
+		assert(threats.size() == 1);
+		
+		assert(threats.contains(Space.B8));
+		
+		board = getEmptyBoard();
+		origin = Space.A2;
+		board.put(origin, new Pawn(Team.BLACK));
+		
+		testPawn = (Pawn) board.get(origin);
+		threats = testPawn.calculateSpacesPieceCanThreaten(origin);
+		
+		assert(threats.size() == 1);
+		
+		assert(threats.contains(Space.B1));
+	}
 	
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {
 		Board board = new Board();

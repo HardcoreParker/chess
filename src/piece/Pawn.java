@@ -85,11 +85,25 @@ public class Pawn extends Piece implements ThreatenSeparateFromMove {
 		ArrayList<Space> threatenedSpaces = new ArrayList<>();
 		
 		if(this.getTeam() == Team.WHITE) {
-			threatenedSpaces.add(Direction.calculateNE(origin));
-			threatenedSpaces.add(Direction.calculateNW(origin));
+			Space NE = Direction.calculateNE(origin);
+			if(NE != null) {
+				threatenedSpaces.add(NE);
+			}
+			
+			Space NW = Direction.calculateNW(origin);
+			if(NW != null) {
+				threatenedSpaces.add(NW);
+			}
 		} else {
-			threatenedSpaces.add(Direction.calculateSW(origin));
-			threatenedSpaces.add(Direction.calculateSE(origin));
+			Space SE = Direction.calculateSE(origin);
+			if(SE != null) {
+				threatenedSpaces.add(SE);
+			}
+			
+			Space SW = Direction.calculateSW(origin);
+			if(SW != null) {
+				threatenedSpaces.add(SW);
+			}
 		}
 		
 		return threatenedSpaces;

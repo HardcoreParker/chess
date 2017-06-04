@@ -172,6 +172,21 @@ public class KingTest {
 		assert(spacesBlackKingCanThreaten.contains(Space.C6));
 		assert(spacesBlackKingCanThreaten.contains(Space.D6));
 	}
+	
+	@Test
+	public void king_calculate_spaces_king_can_threaten_edge_test() {
+		board = getEmptyBoard();
+		origin = Space.A1;
+		board.put(origin, new King(Team.WHITE));
+		testKing = (King) board.get(origin);	
+		
+		ArrayList<Space> spacesKingCanThreaten = testKing.calculateSpacesPieceCanThreaten(origin);
+		
+		assert(spacesKingCanThreaten.size() == 3);
+		assert(spacesKingCanThreaten.contains(Space.A2));
+		assert(spacesKingCanThreaten.contains(Space.B2));
+		assert(spacesKingCanThreaten.contains(Space.B1));
+	}
 
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {
 		Board board = new Board();
