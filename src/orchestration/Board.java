@@ -57,8 +57,8 @@ public class Board {
 				list.add(next); // The space can be taken
 				break; // Stop walking the board in that direction
 			}
-				else {
-				next = null; // Space was occupied by friendly, nulling out next will fail the conditional
+			else { 
+				break; 
 			}
 		}
 		return list;
@@ -75,7 +75,7 @@ public class Board {
 				list.add(next);
 				times--;
 			} else {
-				next = null;
+				break;
 			}
 		}
 		return list;

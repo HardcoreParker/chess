@@ -1,6 +1,10 @@
 package orchestration;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -126,13 +130,9 @@ public class BoardTest {
 		
 		assert(spaces.size() == 7);
 		
-		assert(spaces.contains(Space.A2));
-		assert(spaces.contains(Space.A3));
-		assert(spaces.contains(Space.A4));
-		assert(spaces.contains(Space.A5));
-		assert(spaces.contains(Space.A6));
-		assert(spaces.contains(Space.A7));
-		assert(spaces.contains(Space.A8));
+		Space expected[] = { Space.A2, Space.A3, Space.A4, Space.A5, Space.A6, Space.A7 };
+		
+		assert(spaces.containsAll(getCollection(expected)));
 	}
 	
 	@Test
@@ -149,6 +149,10 @@ public class BoardTest {
 		ArrayList<Space> spaces = Board.walkBoardUntilNextSpaceUnavailable(origin, Direction.S, 9);
 		
 		assert(spaces.size() == 0);
+	}
+	
+	private Set<Space> getCollection(Space[] expected) {
+		return new HashSet<Space>(Arrays.asList(expected));
 	}
 	
 	private LinkedHashMap<Space, Piece> getEmptyBoard() {
