@@ -10,7 +10,7 @@ import piece.Piece;
 public class Board {
 	
 	private static final String BOARD_COLOR = "\u001B[33m"; // purple
-	static LinkedHashMap<Space, Piece> board = new LinkedHashMap<>();
+	static private LinkedHashMap<Space, Piece> board = new LinkedHashMap<>();
 	
 	public Board() {
 		for(Space value : Space.values()) {
@@ -18,7 +18,7 @@ public class Board {
 		}
 	}
 	
-	// Singleton?
+	// TODO - Singleton?
 	public LinkedHashMap<Space, Piece> getBoard() {
 		return board;
 	}
@@ -50,7 +50,7 @@ public class Board {
 			
 			next = Direction.calculateDirection(direction, next);
 			
-			if(isSpaceEmpty(next) && next != null) {
+			if(isSpaceEmpty(next) && !isSpaceOOB(next)) {
 				list.add(next);
 			} else if (!isSpaceEmpty(next) && 
 						isSpaceOccupiedByEnemy(next, board.get(origin).getTeam())) {
@@ -63,7 +63,7 @@ public class Board {
 		}
 		return list;
 	}
-	
+
 	public static ArrayList<Space> walkBoardUntilNextSpaceUnavailable(Space origin, Direction direction, int times) {
 		ArrayList<Space> list = new ArrayList<Space>();
 		Space next = origin;
@@ -71,7 +71,7 @@ public class Board {
 			
 			next = Direction.calculateDirection(direction, next);
 			
-			if(isSpaceEmpty(next)) {
+			if(isSpaceEmpty(next) && !isSpaceOOB(next)) {
 				list.add(next);
 				times--;
 			} else {
@@ -81,30 +81,6 @@ public class Board {
 		return list;
 	}
 	
-	public static boolean isSpaceEmpty(Space space) {
-		return board.get(space) == null;
-	}
-	
-	public static boolean isSpaceOccupiedByEnemy(Space space, Team team) {
-		return !isSpaceEmpty(space) && board.get(space).getTeam() != team;
-	}
-	
-	private String getBoardDivider() {
-		return BOARD_COLOR + "|";
-	}
-	private String getEmptySpace() {
-		return BOARD_COLOR + "_";
-	}
-	
-	private static Space findKing(Team team) throws NoKingFoundException {
-		for(Space space : board.keySet()) {
-			if(board.get(space) != null && board.get(space).getClass().equals(King.class) && board.get(space).getTeam() == team) {
-				return space;
-			}
-		}
-		throw new NoKingFoundException();
-	}
-
 	public static boolean isTeamInCheck(Team team) throws NoKingFoundException {
 		Space kingSpace = findKing(team);
 		ArrayList<Space> opposingTeamThreats = getAllThreatenedSpacesFromTeam(Team.getOpposingTeam(team));
@@ -137,7 +113,35 @@ public class Board {
 	
 	public static boolean isTeamInCheckmate(Team team) {
 		// TODO - Implement checkmate
-		
 		return false;
+	}
+	
+	public static boolean isSpaceOccupiedByEnemy(Space space, Team team) {
+		return !isSpaceEmpty(space) && board.get(space).getTeam() != team;
+	}
+	
+	public static boolean isSpaceEmpty(Space space) {
+		return board.get(space) == null;
+	}
+	
+	// Convenience method to improve clarity
+	private static boolean isSpaceOOB(Space next) {
+		return next == null;
+	}
+	
+	private String getBoardDivider() {
+		return BOARD_COLOR + "|";
+	}
+	private String getEmptySpace() {
+		return BOARD_COLOR + "_";
+	}
+	
+	private static Space findKing(Team team) throws NoKingFoundException {
+		for(Space space : board.keySet()) {
+			if(board.get(space) != null && board.get(space).getClass().equals(King.class) && board.get(space).getTeam() == team) {
+				return space;
+			}
+		}
+		throw new NoKingFoundException();
 	}
 }

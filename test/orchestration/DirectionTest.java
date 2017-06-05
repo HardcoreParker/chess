@@ -1,10 +1,7 @@
 package orchestration;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import orchestration.Board;
-import orchestration.Space;
 
 public class DirectionTest {
 
