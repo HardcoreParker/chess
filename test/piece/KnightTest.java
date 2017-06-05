@@ -1,7 +1,5 @@
 package piece;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
